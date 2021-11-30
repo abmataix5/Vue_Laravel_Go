@@ -68,7 +68,7 @@ export default {
     const router = useRouter();
     const state = reactive({
       workeritemvalue: {
-        name: "",
+        username: "",
         email: "",
         phone: "",
         address: "",

@@ -18,7 +18,7 @@ export const workerStore = {
             if (payload) {
                 state.workerlist = payload;
             } else {
-                state.workerlist = {id: "",name: "",email: "", phone: "",address: "", worker_type: "",antiguedad: "" };
+                state.workerlist = {id: "",username: "",email: "", phone: "",address: "", worker_type: "",antiguedad: "" };
             }
         }
     },
@@ -38,8 +38,8 @@ export const workerStore = {
 
             UserService.getAll()
                 .then(function (data_worker) {
-                    console.log(data_worker.data)
-                    store.commit(Constant.INITIALIZE_WORKERITEM, data_worker.data);
+                    console.log(data_worker.data.response)
+                    store.commit(Constant.INITIALIZE_WORKERITEM, data_worker.data.response);
                    
                 })
                 .catch(function (error) {
@@ -47,7 +47,7 @@ export const workerStore = {
                 })
         },
         [Constant.DELETE_WORKER]: (store, payload) => {
-    
+    console.log(payload.id);
             UserService.deleteWorker(payload.id)
                 .then(function (res) {
                     if (res.statusText !== "OK") {

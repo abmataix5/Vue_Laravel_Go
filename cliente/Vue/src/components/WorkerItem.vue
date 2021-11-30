@@ -2,7 +2,7 @@
 
     <li >
         <span :class="{ pointer:true}">
-           Nombre del usuario : {{workeritem.name}}<br>
+           Nombre del usuario : {{workeritem.username}}<br>
            Email: {{workeritem.email}}<br>
            Numero de telefono: {{workeritem.phone}}<br>
            Cargo del trabajador: {{workeritem.worker_type}}<br>

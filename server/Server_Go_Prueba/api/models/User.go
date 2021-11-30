@@ -17,6 +17,7 @@ type Worker struct {
 	ID          uint32 `gorm:"primary_key;auto_increment" json:"id"`
 	Name        string `gorm:"size:255;not null;unique" json:"username"`
 	Email       string `gorm:"size:100;not null;unique" json:"email"`
+	Phone       string `gorm:"size:100;not null;unique" json:"phone"`
 	Password    string `gorm:"size:100;not null;" json:"password"`
 	Address     string `gorm:"size:255;not null;unique" json:"adress"`
 	Worker_type string `gorm:"size:255;not null;unique" json:"worker_type"`

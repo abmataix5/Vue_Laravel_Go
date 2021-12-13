@@ -16,8 +16,11 @@ import ApiGo from '@/services/Api.go'
     return ApiGo().delete(`workers/${id}`)
   },
   updateWorker(id, data) {
-    return ApiGo().put(`workesr/${id}`, data)
-  }
+    return ApiGo().put(`workers/${id}`, data)
+  },
+  loginWorker(data){
+    return ApiGo().post('login', data)
+  },
  } 
 
 

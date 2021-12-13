@@ -4,6 +4,7 @@ import Rentings from '../views/Rentings';
 import Workers from '../views/Workers';
 import Courts from '../views/AddCourt';
 import AddWorker from '../views/AddWorker';
+import Login from '../views/Login'
 
 const routes = [
 
@@ -39,13 +40,20 @@ const routes = [
             title:'Courts'
         }
     },
-
     {
         path:'/addworker',
         name: 'Add Worker',
         component:AddWorker,
         meta:{
             title:'Add worker'
+        }
+    },
+    {
+        path:'/login',
+        name: 'Login',
+        component:Login,
+        meta:{
+            title:'Login'
         }
     }
 

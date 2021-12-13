@@ -1,100 +1,208 @@
 <template>
+    <div class="container">
+    <form @submit.prevent="onSubmit">
+    <!-- Nombre del trabajdor-->
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for=""> Nombre del trabajador:</label><input class="form-control" placeholder="Marc García Márquez" type="text" v-model="v$.form.username.$model">
+          <div class="pre-icon os-icon os-icon-user-male-circle"></div>
+          <!-- Error Message -->
+          <div class="input-errors" v-for="(error, index) of v$.form.username.$errors" :key="index">
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </div>
+      </div>
+
+  <!-- Dirección -->
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="">Dirección del trabajador:</label><input class="form-control" placeholder="Calle Gran Via nº3" type="text" v-model="v$.form.address.$model">
+          <!-- Error Message -->
+          <div class="input-errors" v-for="(error, index) of v$.form.address.$errors" :key="index">
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </div>
+      </div>
+
+  <!-- Número del trabajador -->
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="">Número de telefono:</label><input class="form-control" placeholder="644926667" type="text" v-model="v$.form.phone.$model">
+          <!-- Error Message -->
+          <div class="input-errors" v-for="(error, index) of v$.form.phone.$errors" :key="index">
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </div>
+      </div>
+
+   <!-- Puesto del trabajador -->
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="">Puesto del trabajador:</label><input class="form-control" placeholder="Professor, gerente..." type="text" v-model="v$.form.worker_type.$model">
+          <!-- Error Message -->
+          <div class="input-errors" v-for="(error, index) of v$.form.worker_type.$errors" :key="index">
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Email  -->
+    <div class="form-group">
+      <label for="">Email:</label><input class="form-control" placeholder="Introduzca elemail de contacto del trabajador" type="email" v-model="v$.form.email.$model">
+      <div class="pre-icon os-icon os-icon-email-2-at2"></div>
+      <!-- Error Message -->
+        <div class="input-errors" v-for="(error, index) of v$.form.email.$errors" :key="index">
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+    </div>
+
+
+    <!-- Contraseña-->
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for=""> Contraseña</label><input class="form-control"  type="password" v-model="v$.form.password.$model">
+          <div class="pre-icon os-icon os-icon-fingerprint"></div>
+          <!-- Error Message -->
+          <div class="input-errors" v-for="(error, index) of v$.form.password.$errors" :key="index">
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" v-model="v$.form.admin.$model">
+          <label class="form-check-label" for="flexCheckDefault"> Concedir permisos de administrador </label>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <!-- Submit Button -->
+    <div class="buttons-w">
+      <button class="btn btn-primary" :disabled="v$.form.$invalid" >Añadir nuevo trabajador</button> <!-- No dejara enviar si todos los inputs no son correctos -->
+    </div>
     
-   <form>
-
-  <div class="form-group row">
-    <label for="name" class="col-sm-2 col-form-label">Nombre</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" placeholder="Nombre del trabajador" v-model="state.workeritemvalue.name">
-    </div>
+  </form>
   </div>
-
-  <div class="form-group row">
-    <label for="email" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="email" placeholder="trabajador1@gmail.com" v-model="state.workeritemvalue.email">
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="phone" class="col-sm-2 col-form-label">Número de telefono:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="phone" placeholder="655489768" v-model="state.workeritemvalue.phone">
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="location" class="col-sm-2 col-form-label">Localización</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="location" placeholder="Localización" v-model="state.workeritemvalue.adress">
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="type" class="col-sm-2 col-form-label">Puesto del trabajador</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="type" placeholder="Localización" v-model="state.workeritemvalue.worker_type">
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="antiguedad" class="col-sm-2 col-form-label">Antiguedad</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="antiguedad" placeholder="Localización" v-model="state.workeritemvalue.antiguedad">
-    </div>
-  </div>
-
-
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary" @click="newWorker">Crear nuevo usuario</button>
-    </div>
-  </div>
-</form>
-
 </template>
 
 <script>
 
-import Constant from "../Constant";
-import { reactive } from "vue";
+
+import useVuelidate from "@vuelidate/core";
+import { reactive, computed } from "vue";
+import { required, email, minLength } from "@vuelidate/validators";
+
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import Constant from "../Constant";
+
+
+export function validName(name) {
+ let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+ if (validNamePattern.test(name)){
+   return true;
+ }
+ return false;
+}
+ 
+export function validPhone(phone) {
+ let validPhonePattern = new RegExp("^[679]{1}[0-9]{8}$");
+ if (validPhonePattern.test(phone)){
+   return true;
+ }
+ return false;
+}
+
+
 
 export default {
-    
+
   setup() {
+
     const store = useStore();
-    const router = useRouter();
+
     const state = reactive({
-      workeritemvalue: {
+      form: {
         username: "",
         email: "",
-        phone: "",
+        password: "",
         address: "",
-        worker_type: "",
-        antiguedad: "0 años" ,
-      },
+        phone:"",
+        worker_type:"",
+        antiguedad:"0 años",
+        admin:""
+      }
+    });
+    const rules = computed(() => {
+      return {
+        form: {
+          username: {
+
+          required, name_validation: {
+           $validator: validName,
+           $message: 'Nombre del trabajador incorrecto, el nombre no puede contener guiones ni numeros.'
+         }
+
+          },
+          phone: {
+          required, phone_validation: {
+            $validator: validPhone,
+            $message: 'El formato del número de telefono es incorrecto'
+          }
+          },
+          worker_type:{required},
+          email: { required, email },
+          password: { required, min: minLength(6) },
+          address: {required},
+          admin:{}
+        },
+      };
     });
 
-    const newWorker = () => {
+    const v$ = useVuelidate(rules, state);
+    return { state, v$ , store};
+  },
+  methods: {
 
-      if (state.workeritemvalue.name != undefined) {
-        store.dispatch("worker/" + Constant.ADD_WORKER, {
-          workeritem: state.workeritemvalue,
+    onSubmit() {
+      this.v$.$validate();
+
+      if (!this.v$.$error) {
+
+        if(this.state.form.admin == true){
+          this.state.form.admin = 'true'
+        }else{
+          this.state.form.admin = 'false'
+        }
+   
+        this.store.dispatch("worker/" + Constant.ADD_WORKER, {
+            workeritem: this.state.form,
         });
-        router.push({ name: "workerList" });
+        alert("Usuario registrado");
+
       } else {
+      
         alert("Error");
       }
-    };
-   
-    return { state, newWorker};
-  }
-    
-    
-}
+    },
+  },
+};
 </script>
+
+
 
 <style>
 

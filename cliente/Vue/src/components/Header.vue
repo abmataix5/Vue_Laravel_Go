@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <span class="navbar-brand">MyPadelClub</span>
         <button class="navbar-toggler" type="button" @click="changeIsNavShow">
             <span class="navbar-toggler-icon"></span>
@@ -18,6 +18,9 @@
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" to="/courts">Crear nueva pista</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/login">Iniciar sesión</router-link>
                 </li>
             </ul>
         </div>

@@ -1,5 +1,6 @@
 import Constant from '../Constant';
 import UserService from '@/services/UserService'
+import { setStore } from '@/config/utils'
 
 export const workerStore = {
     namespaced: true,
@@ -18,8 +19,13 @@ export const workerStore = {
             if (payload) {
                 state.workerlist = payload;
             } else {
-                state.workerlist = {id: "",username: "",email: "", phone: "",address: "", worker_type: "",antiguedad: "" };
+                state.workerlist = {id: "",username: "",email: "", phone: "",address: "", worker_type: "",antiguedad: "", password:"",admin:"" };
             }
+        },
+        [Constant.LOGIN_WORKER]: (state, payload) => {
+            console.log(payload.token);
+            setStore('token', payload.token); /* Guardamos token en localstorage */
+            setStore('admin', payload.admin); /* Guardamos si es admin o no */
         }
     },
     actions: {
@@ -47,7 +53,8 @@ export const workerStore = {
                 })
         },
         [Constant.DELETE_WORKER]: (store, payload) => {
-    console.log(payload.id);
+
+          console.log(payload.id);
             UserService.deleteWorker(payload.id)
                 .then(function (res) {
                     if (res.statusText !== "OK") {
@@ -61,6 +68,18 @@ export const workerStore = {
                     console.log(error)
                 })
         },
+        [Constant.LOGIN_WORKER]: (store,payload) => {
+            console.log(payload)
+            UserService.loginWorker(payload.workeritem)
+                .then(function (worker_logued) {
+                    console.log(worker_logued.data.response)
+                    store.commit(Constant.LOGIN_WORKER, worker_logued.data.response);
+                   
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
     },
     getters: {
         getWorkers(state) {

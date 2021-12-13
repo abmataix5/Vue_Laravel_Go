@@ -6,6 +6,7 @@ export default {
     TOGGLE_DONE : "toggleDone",
     DELETE_WORKER : "deleteWorker",
     INITIALIZE_WORKERITEM : "initializeUserItem",
+    LOGIN_WORKER : "loginWorker",
 
     /* Courts */
 

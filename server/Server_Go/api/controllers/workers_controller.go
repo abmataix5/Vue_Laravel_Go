@@ -69,11 +69,12 @@ func (server *Server) CreateUser(c *gin.Context) {
 }
 
 func (server *Server) GetUsers(c *gin.Context) {
-	//clear previous error if any
+
 	errList = map[string]string{}
 	user := models.Worker{}
 
 	users, err := user.FindAllUsers(server.DB)
+
 	if err != nil {
 		errList["No_user"] = "No hemos encontrado usuarios disponibles"
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -82,14 +83,13 @@ func (server *Server) GetUsers(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"status":   http.StatusOK,
-		"response": users,
-	})
+
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "response": users})
+
 }
 
 func (server *Server) GetUser(c *gin.Context) {
-	//clear previous error if any
+
 	errList = map[string]string{}
 	userID := c.Param("id")
 
@@ -120,11 +120,11 @@ func (server *Server) GetUser(c *gin.Context) {
 }
 
 func (server *Server) UpdateUser(c *gin.Context) {
-	//clear previous error if any
+
 	errList = map[string]string{}
 
 	userID := c.Param("id")
-	// Check if the user id is valid
+
 	uid, err := strconv.ParseUint(userID, 10, 32)
 	if err != nil {
 		errList["Invalid_request"] = "Invalid Request"
@@ -135,7 +135,6 @@ func (server *Server) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	// Get user id from the token for valid tokens
 	tokenID, err := auth.ExtractTokenID(c.Request)
 	if err != nil {
 		errList["Unauthorized"] = "Unauthorized"
@@ -146,7 +145,6 @@ func (server *Server) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	// If the id is not the authenticated user id
 	if tokenID != 0 && tokenID != uint32(uid) {
 		errList["Unauthorized"] = "Unauthorized"
 		c.JSON(http.StatusUnauthorized, gin.H{
@@ -156,7 +154,6 @@ func (server *Server) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	// Start processing the request
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		errList["Invalid_body"] = "Unable to get request"
@@ -178,7 +175,6 @@ func (server *Server) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	// Check for previous details
 	formerUser := models.Worker{}
 	err = server.DB.Debug().Model(models.Worker{}).Where("id = ?", uid).Take(&formerUser).Error
 	if err != nil {

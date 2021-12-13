@@ -1,4 +1,7 @@
 <template>
+
+  <div class="container">
+
       <div style="mt-2">
         <div class="row">
             <div class="col p-3">
@@ -19,7 +22,7 @@
     </div>
 
 
-
+  </div>
 
 </template>
 

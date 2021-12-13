@@ -14,6 +14,7 @@ require (
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/mattn/go-isatty v0.0.9 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
+	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/twinj/uuid v1.0.0
 	github.com/ugorji/go v1.1.7 // indirect

@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/victorsteven/forum/api/auth"
 	"github.com/victorsteven/forum/api/models"
 	"github.com/victorsteven/forum/api/security"
 	"github.com/victorsteven/forum/api/utils/formaterror"
@@ -64,27 +63,19 @@ func (server *Server) Login(c *gin.Context) {
 
 func (server *Server) SignIn(email, password string) (map[string]interface{}, error) {
 	var err error
-	userData := make(map[string]interface{})
+
 	user := models.Worker{}
 
 	err = server.DB.Debug().Model(models.Worker{}).Where("email = ?", email).Take(&user).Error
 	if err != nil {
-		fmt.Println("this is the error getting the user: ", err)
+		fmt.Println("Error get usuario: ", err)
 		return nil, err
 	}
 	err = security.VerifyPassword(user.Password, password)
 	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
-		fmt.Println("this is the error hashing the password: ", err)
+		fmt.Println("Error password hashing: ", err)
 		return nil, err
 	}
-	token, err := auth.CreateToken(user.ID)
-	if err != nil {
-		fmt.Println("this is the error creating the token: ", err)
-		return nil, err
-	}
-	userData["token"] = token
-	userData["id"] = user.ID
-	userData["email"] = user.Email
-	userData["name"] = user.Name
-	return userData, nil
+
+	return user.SerializeWorkerLogin(), nil
 }

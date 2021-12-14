@@ -8,19 +8,20 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+	"github.com/twinj/uuid"
 	"github.com/victorsteven/forum/api/security"
 )
 
 type Worker struct {
-	ID          uint32 `gorm:"primary_key;auto_increment" json:"id"`
-	Name        string `gorm:"size:255;not null;unique" json:"username"`
-	Email       string `gorm:"size:100;not null;unique" json:"email"`
-	Phone       string `gorm:"size:100;not null;unique" json:"phone"`
-	Password    string `gorm:"size:100;not null;" json:"password"`
-	Address     string `gorm:"size:255;not null;unique" json:"adress"`
-	Worker_type string `gorm:"size:255;not null;unique" json:"worker_type"`
-	Antiguedad  string `gorm:"size:255;not null;unique" json:"antiguedad"`
-	Admin       string `gorm:"size:255;not null;unique" json:"admin"`
+	ID          uuid.UUID `gorm:"column:id;type:uuid;primary_key;json:"id""`
+	Name        string    `gorm:"size:255;not null;unique" json:"username"`
+	Email       string    `gorm:"size:100;not null;unique" json:"email"`
+	Phone       string    `gorm:"size:100;not null;unique" json:"phone"`
+	Password    string    `gorm:"size:100;not null;" json:"password"`
+	Address     string    `gorm:"size:255;not null;unique" json:"adress"`
+	Worker_type string    `gorm:"size:255;not null;unique" json:"worker_type"`
+	Antiguedad  string    `gorm:"size:255;not null;unique" json:"antiguedad"`
+	Admin       string    `gorm:"size:255;not null;unique" json:"admin"`
 }
 
 func (worker *Worker) BeforeSave() error {
@@ -29,6 +30,7 @@ func (worker *Worker) BeforeSave() error {
 		return err
 	}
 	worker.Password = string(hashedPassword)
+	worker.ID = uuid.NewV4()
 	return nil
 }
 

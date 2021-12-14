@@ -6,6 +6,12 @@ export default () => {
   })
 
 
+  const token = localStorage.getItem('token')
+  if (token) {
+    axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`
+    console.log(token);
+  } 
+
   axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {

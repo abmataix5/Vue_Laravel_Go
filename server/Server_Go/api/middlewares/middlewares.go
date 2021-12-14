@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,6 +14,7 @@ func TokenAuthMiddleware() gin.HandlerFunc {
 		err := auth.TokenValid(c.Request)
 		if err != nil {
 			errList["unauthorized"] = "Unauthorized"
+			fmt.Println("No autorizado")
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"status": http.StatusUnauthorized,
 				"error":  errList,

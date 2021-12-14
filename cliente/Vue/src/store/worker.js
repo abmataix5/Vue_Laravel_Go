@@ -1,6 +1,6 @@
 import Constant from '../Constant';
 import UserService from '@/services/UserService'
-import { setStore } from '@/config/utils'
+import { setStore } from '@/services/jwt.service'
 
 export const workerStore = {
     namespaced: true,

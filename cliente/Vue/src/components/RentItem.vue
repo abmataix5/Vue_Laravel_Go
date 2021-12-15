@@ -22,8 +22,8 @@
     flex-direction: row;
 }
 figure{
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -37,7 +37,7 @@ figure caption div{
 }
 img{
     width: 120px;
-    height: 120px;
+    height: 100px;
 }
 </style>
 

@@ -6,7 +6,10 @@
             </div>
         </div>
         <div class="row">
-            <div>Dias</div>
+            <div class="col p-3">
+                 <div>Dias</div>
+            </div>
+           
 
         </div>
         <div class="card card-default card-borderless">

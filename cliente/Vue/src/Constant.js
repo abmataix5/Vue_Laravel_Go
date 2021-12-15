@@ -10,10 +10,17 @@ export default {
 
     /* Courts */
 
-    ADD_COURT : "addCourt",
-    UPDATE_TODO : "updateCourt",
-    DELETE_COURT : "deleteCourt",
-    INITIALIZE_COURTITEM : "initializeCourtItem",
+    ADD_COURT : "court/addCourt",
+    UPDATE_COURT : "court/updateCourt",
+    DELETE_COURT : "court/deleteCourt",
+    INITIALIZE_COURTITEM : "court/initializeCourtItem",
+
+    /* Rents */
+
+       ADD_RENT : "rent/addRent",
+       UPDATE_RENT : "rent/updateRent",
+       DELETE_RENT : "rent/deleteRent",
+       INITIALIZE_RENTITEM : "rent/initializeRentItem",
 
     /* Partners */
 

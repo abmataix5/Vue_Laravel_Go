@@ -1,13 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from '../views/Home';
-import Rentings from '../views/Rentings';
+
 import Workers from '../views/Workers';
-import Courts from '../views/AddCourt';
 import AddWorker from '../views/AddWorker';
 import Login from '../views/Login'
 import guardAuth from "../guards/guardAuth";
 /* import authGuard from '../guards/guardAuth' */
 /* import store from '@/store'
+
+import Login from '../views/Login';
+
+import CourtList from '../views/CourtList';
+import CourtAdd from '../views/CourtAdd';
+import UpdateCourt from '../views/UpdateCourt';
+
+import RentList from '../views/RentList';
 
 const authGuard = (to, from, next) => {
     if (store.getters['worker/isAuthenticated']) {
@@ -30,14 +37,6 @@ const routes = [
         }
     },
     {
-        path:'/rentings',
-        name: 'Rentings',
-        component:Rentings,
-        meta:{
-            title:'Rentings'
-        }
-    },
-    {
         path:'/workers',
         name: 'Workers',
         component:Workers,
@@ -47,13 +46,37 @@ const routes = [
         beforeEnter: guardAuth.isAdmin 
     },
     {
-        path:'/courts',
-        name: 'Courts',
-        component:Courts,
+        path:'/court',
+        name: 'courtList',
+        component:CourtList,
         meta:{
             title:'Courts'
         },
         beforeEnter: guardAuth.isAuthenticated 
+    },
+    { 
+        path:'/court/add', 
+        name:'courtAdd', 
+        component: CourtAdd,
+        meta:{
+            title:'CourtsAdd'
+        } 
+    },
+    { 
+        path:'/court/update/:id', 
+        name:'updateCourt', 
+        component: UpdateCourt,
+        meta:{
+            title:'UpdateCourts'
+        } 
+    },
+    {
+        path:'/rent',
+        name: 'rentList',
+        component:RentList,
+        meta:{
+            title:'Rentings'
+        }
     },
     {
         path:'/addworker',

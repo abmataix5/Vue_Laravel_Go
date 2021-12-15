@@ -11,13 +11,13 @@
                     <router-link class="nav-link" to="/">Home</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/rentings">Reservas</router-link>
+                    <router-link class="nav-link" to="/rent">Reservas</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" to="/workers">Listado de trabajadores</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/courts">Crear nueva pista</router-link>
+                    <router-link class="nav-link" to="/court">Menu Pistas</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" to="/login">Iniciar sesión</router-link>

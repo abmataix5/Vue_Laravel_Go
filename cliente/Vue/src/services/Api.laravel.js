@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default () => {
   const axiosInstance = axios.create({
-    baseURL: "http://0.0.0.0:8000/api"
+    baseURL: "http://0.0.0.0:8001/api"
   })
 
 

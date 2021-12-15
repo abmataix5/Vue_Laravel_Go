@@ -3,10 +3,9 @@ import {store} from '@/store'
 
   export default {
 
-    isAuthenticated(from,to,next){
+    workerAuthenticated(from,to,next){
 
-      console.log('entra');
-      if (store.getters['worker/isAuthenticated']) {
+      if (store.getters['worker/isWorkerAuthenticated']) {
         next()
       } else {
         next('/login')
@@ -16,11 +15,7 @@ import {store} from '@/store'
 
     isAdmin(from,to,next) {
 
-      console.log('entra');
       if (store.getters['worker/isAdmin']) {
-
-        const admin = store.getters['worker/isAdmin'];
-        console.log(admin);
         next()
       } else {
         next('/login')

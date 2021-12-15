@@ -86,26 +86,30 @@ export const workerStore = {
     },
     getters: {
         getWorkers(state) {
+
             return state.workerlist;
         },
      
-        isAuthenticated: (state) => {
-      
-            if(state.user){
+        isWorkerAuthenticated: () => {
+
+            if(localStorage.getItem('token')){
                 return true;
             }else{
                 return false;
             }
         },
-        isAdmin: (state) => {
+        isAdmin: () => {
 
-            const isAdmin = state.user.admin;
-            console.log(isAdmin);
-            
-            if(isAdmin == true){
-
+            if(localStorage.getItem('admin') === 'true'){
                 return true;
-
+            }else{
+                return false
+            }
+        
+        },
+        userLogued(){
+            if(localStorage.getItem('token')){
+                return true;
             }else{
                 return false;
             }

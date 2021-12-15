@@ -20,7 +20,10 @@
                     <router-link class="nav-link" to="/court">Menu Pistas</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/login">Iniciar sesión</router-link>
+                    <router-link class="nav-link" to="/login" v-if="state.userLogued === false">Iniciar sesión</router-link>
+                </li>
+                 <li class="nav-item">
+                    <router-link class="nav-link" to="/login" v-if="state.userLogued === true" @click="checkOut">Cerrar sesión</router-link>
                 </li>
             </ul>
         </div>
@@ -30,17 +33,34 @@
 <script>
 
 import { useRoute } from 'vue-router';
+import { reactive, computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
  
   name: 'Header',
   setup() {
 
-    const route = useRoute();
+      const route = useRoute();
+      const store = useStore();
 
-    return {
-      route
-    }
+      const state = reactive({
+
+        userLogued: computed(() => store.getters["worker/userLogued"])
+
+      });
+
+      
+        const checkOut = () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('admin');
+            location.reload();
+        }
+
+
+    return { route,state,checkOut }
+    
+
   }
 
 }

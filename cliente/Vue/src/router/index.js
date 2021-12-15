@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from '../views/Home';
-import Rentings from '../views/Rentings';
+
 import Workers from '../views/Workers';
-import Courts from '../views/AddCourt';
 import AddWorker from '../views/AddWorker';
-import Login from '../views/Login'
+
+import Login from '../views/Login';
+
+import CourtList from '../views/CourtList';
+import CourtAdd from '../views/CourtAdd';
+import UpdateCourt from '../views/UpdateCourt';
+
+import RentList from '../views/RentList';
 
 const routes = [
 
@@ -17,14 +23,6 @@ const routes = [
         }
     },
     {
-        path:'/rentings',
-        name: 'Rentings',
-        component:Rentings,
-        meta:{
-            title:'Rentings'
-        }
-    },
-    {
         path:'/workers',
         name: 'Workers',
         component:Workers,
@@ -33,11 +31,35 @@ const routes = [
         }
     },
     {
-        path:'/courts',
-        name: 'Courts',
-        component:Courts,
+        path:'/court',
+        name: 'courtList',
+        component:CourtList,
         meta:{
             title:'Courts'
+        }
+    },
+    { 
+        path:'/court/add', 
+        name:'courtAdd', 
+        component: CourtAdd,
+        meta:{
+            title:'CourtsAdd'
+        } 
+    },
+    { 
+        path:'/court/update/:id', 
+        name:'updateCourt', 
+        component: UpdateCourt,
+        meta:{
+            title:'UpdateCourts'
+        } 
+    },
+    {
+        path:'/rent',
+        name: 'rentList',
+        component:RentList,
+        meta:{
+            title:'Rentings'
         }
     },
     {

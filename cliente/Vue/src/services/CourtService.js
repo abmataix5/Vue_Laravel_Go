@@ -1,19 +1,25 @@
-import { ApiServiceLaravel } from "./Api.laravel";
+import Apilaravel from "@/services/Api.laravel";
 
+export default{
 
-export const RentingsService = {
-
-    get(id) {
-      return ApiServiceLaravel.get("courts/", id);
+    get() {
+      console.log("ENTRA GET APILARAVEL");
+      return Apilaravel().get(`courts/`);
     },
-    create(params) {
-      return ApiServiceLaravel.post("courts/", { court: params });
+    add(params) {
+      console.log("apiservice add");
+      console.log(params);
+      return Apilaravel().post(`courts/`, params);
     },
     update(id, params) {
-      return ApiServiceLaravel.update("courts/", id, { court: params });
+      console.log("apiservice update");
+      console.log(id)
+      console.log(params)
+      return Apilaravel().put(`courts/${id}`, params); 
     },
-    destroy(id) {
-      return ApiServiceLaravel.delete(`courts/${id}`);
+    delete(id) {
+      console.log("apiservice delete");
+      console.log(id);
+      return Apilaravel().delete(`courts/${id}`);
     }
   };
-  

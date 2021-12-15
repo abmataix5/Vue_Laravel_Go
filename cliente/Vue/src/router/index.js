@@ -5,7 +5,20 @@ import Workers from '../views/Workers';
 import Courts from '../views/AddCourt';
 import AddWorker from '../views/AddWorker';
 import Login from '../views/Login'
+import guardAuth from "../guards/guardAuth";
+/* import authGuard from '../guards/guardAuth' */
+/* import store from '@/store'
 
+const authGuard = (to, from, next) => {
+    if (store.getters['worker/isAuthenticated']) {
+        console.log(store.getters['worker/isAuthenticated']);
+      next()
+    } else {
+        console.log(store.getters["worker/isAuthenticated"]);
+      next('/login')
+    }
+  }
+ */
 const routes = [
 
     {
@@ -30,7 +43,8 @@ const routes = [
         component:Workers,
         meta:{
             title:'Workers'
-        }
+        } ,
+        beforeEnter: guardAuth.isAdmin 
     },
     {
         path:'/courts',
@@ -38,7 +52,8 @@ const routes = [
         component:Courts,
         meta:{
             title:'Courts'
-        }
+        },
+        beforeEnter: guardAuth.isAuthenticated 
     },
     {
         path:'/addworker',
@@ -46,7 +61,8 @@ const routes = [
         component:AddWorker,
         meta:{
             title:'Add worker'
-        }
+        } ,
+        beforeEnter: guardAuth.isAdmin 
     },
     {
         path:'/login',

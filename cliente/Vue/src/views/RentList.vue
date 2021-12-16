@@ -55,8 +55,5 @@ export default {
 </script>
 
 <style>
-.listgroup{
-    /* display: flex;
-    flex-direction: row; */
-}
+
 </style>

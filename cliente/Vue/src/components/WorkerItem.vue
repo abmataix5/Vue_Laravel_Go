@@ -9,8 +9,8 @@
            ID del trabajador: {{workeritem.ID}}<br>
         </span>
         <div class="float-right">
-            <span class="badge badge-secondary pointer ml-1" @click.stop="editTodo(workeritem.ID)">Editar</span> 
-            <span class="badge badge-secondary pointer ml-1" @click.stop="deleteW(workeritem.ID)">Eliminar</span>
+            <span class="btn btn-success   pointer ml-1" @click.stop="editTodo(workeritem.ID)">Editar</span> 
+            <span class="btn btn-danger pointer ml-1" @click.stop="deleteW(workeritem.ID)">Eliminar</span>
         </div>
     </li>
 

@@ -40,7 +40,15 @@ func TokenValid(r *http.Request) error {
 	return nil
 }
 
+func AdminValid(r *http.Request) error {
+
+	fmt.Println(r)
+
+	return nil
+}
+
 func ExtractToken(r *http.Request) string {
+
 	keys := r.URL.Query()
 	token := keys.Get("token")
 	if token != "" {
@@ -51,6 +59,16 @@ func ExtractToken(r *http.Request) string {
 		return strings.Split(bearerToken, " ")[1]
 	}
 	return ""
+}
+
+func ExtractIfADmin(r *http.Request) string {
+	keys := r.URL.Query()
+	admin := keys.Get("token")
+	if admin != "false" {
+		return "true"
+	}
+
+	return "false"
 }
 
 func ExtractTokenID(r *http.Request) (uint32, error) {

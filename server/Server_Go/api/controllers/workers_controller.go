@@ -73,9 +73,8 @@ func (server *Server) GetUsers(c *gin.Context) {
 
 	errList = map[string]string{}
 	user := models.Worker{}
-
 	users, err := user.FindAllUsers(server.DB)
-
+	fmt.Println(c.Request.Body)
 	if err != nil {
 		errList["No_user"] = "No hemos encontrado usuarios disponibles"
 		c.JSON(http.StatusInternalServerError, gin.H{

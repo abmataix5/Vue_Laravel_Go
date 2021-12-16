@@ -31,6 +31,7 @@ func (worker *Worker) BeforeSave() error {
 	}
 	worker.Password = string(hashedPassword)
 	worker.ID = uuid.NewV4()
+
 	return nil
 }
 

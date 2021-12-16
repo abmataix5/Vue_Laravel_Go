@@ -6,10 +6,11 @@
            Email: {{workeritem.email}}<br>
            Numero de telefono: {{workeritem.phone}}<br>
            Cargo del trabajador: {{workeritem.worker_type}}<br>
+           ID del trabajador: {{workeritem.ID}}<br>
         </span>
         <div class="float-right">
-            <span class="badge badge-secondary pointer ml-1" @click.stop="editTodo(workeritem.id)">Editar</span> 
-            <span class="badge badge-secondary pointer ml-1" @click.stop="deleteW(workeritem.id)">Eliminar</span>
+            <span class="badge badge-secondary pointer ml-1" @click.stop="editTodo(workeritem.ID)">Editar</span> 
+            <span class="badge badge-secondary pointer ml-1" @click.stop="deleteW(workeritem.ID)">Eliminar</span>
         </div>
     </li>
 

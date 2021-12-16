@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -83,7 +84,7 @@ func (server *Server) GetUsers(c *gin.Context) {
 		})
 		return
 	}
-
+	fmt.Println(users)
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "response": users})
 
 }
@@ -264,47 +265,18 @@ func (server *Server) UpdateUser(c *gin.Context) {
 }
 
 func (server *Server) DeleteUser(c *gin.Context) {
-	//clear previous error if any
+
+	/*Limpia cadena de errores si existe alguno */
+
 	errList = map[string]string{}
-	var tokenID uint32
-	userID := c.Param("id")
 
-	// Check if the user id is valid
-	uid, err := strconv.ParseUint(userID, 10, 32)
-	if err != nil {
-		errList["Invalid_request"] = "Invalid Request"
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  errList,
-		})
-		return
-	}
-
-	// Get user id from the token for valid tokens
-	tokenID, err = auth.ExtractTokenID(c.Request)
-	if err != nil {
-		errList["Unauthorized"] = "Unauthorized"
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"status": http.StatusUnauthorized,
-			"error":  errList,
-		})
-		return
-	}
-
-	// If the id is not the authenticated user id
-	if tokenID != 0 && tokenID != uint32(uid) {
-		errList["Unauthorized"] = "Unauthorized"
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"status": http.StatusUnauthorized,
-			"error":  errList,
-		})
-		return
-	}
+	userID := c.Params.ByName("id")
 
 	user := models.Worker{}
-	_, err = user.DeleteAUser(server.DB, uint32(uid))
+	_, err := user.DeleteAUser(server.DB, userID)
 	if err != nil {
-		errList["Other_error"] = "Please try again later"
+		fmt.Println(err)
+		errList["Other_error"] = "UUID no encontrado!! Error en borrar usuario"
 		c.JSON(http.StatusNotFound, gin.H{
 			"status": http.StatusNotFound,
 			"error":  errList,

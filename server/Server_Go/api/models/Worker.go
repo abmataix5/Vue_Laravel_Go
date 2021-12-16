@@ -107,7 +107,8 @@ func (worker *Worker) UpdateAUser(db *gorm.DB, uid uint32) (*Worker, error) {
 	return worker, nil
 }
 
-func (u *Worker) DeleteAUser(db *gorm.DB, uid uint32) (int64, error) {
+func (u *Worker) DeleteAUser(db *gorm.DB, uid string) (int64, error) {
+	/* fmt.Println(uid) */
 	db = db.Debug().Model(&Worker{}).Where("id = ?", uid).Take(&Worker{}).Delete(&Worker{})
 	if db.Error != nil {
 		return 0, db.Error

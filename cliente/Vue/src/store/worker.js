@@ -18,6 +18,7 @@ export const workerStore = {
           
             if (payload) {
                 state.workerlist = payload;
+                console.log(state.worker);
             } else {
                 state.workerlist = {id: "",username: "",email: "", phone: "",address: "", worker_type: "",antiguedad: "", password:"",admin:"" };
             }
@@ -57,7 +58,7 @@ export const workerStore = {
         },
         [Constant.DELETE_WORKER]: (store, payload) => {
 
-          console.log(payload.id);
+          console.log(payload);
             UserService.deleteWorker(payload.id)
                 .then(function (res) {
                     if (res.statusText !== "OK") {

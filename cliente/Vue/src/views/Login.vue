@@ -83,6 +83,7 @@ export default {
             workeritem: this.state.form,
           });
         alert("Usuario logueado");
+     location.reload();
         router.push('/');
       } else {
       

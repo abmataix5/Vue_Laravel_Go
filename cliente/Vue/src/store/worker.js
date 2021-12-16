@@ -1,6 +1,6 @@
 import Constant from '../Constant';
 import UserService from '@/services/UserService'
-import { setStore } from '@/config/utils'
+import { setStore } from '@/services/jwt.service'
 
 export const workerStore = {
     namespaced: true,
@@ -23,9 +23,12 @@ export const workerStore = {
             }
         },
         [Constant.LOGIN_WORKER]: (state, payload) => {
-            console.log(payload.token);
+         
             setStore('token', payload.token); /* Guardamos token en localstorage */
             setStore('admin', payload.admin); /* Guardamos si es admin o no */
+
+            state.user = payload;
+            console.log(state.user.admin);  /* Guardamos en el state el usuario logueado */
         }
     },
     actions: {
@@ -83,8 +86,34 @@ export const workerStore = {
     },
     getters: {
         getWorkers(state) {
+
             return state.workerlist;
-        }
+        },
+     
+        isWorkerAuthenticated: () => {
+
+            if(localStorage.getItem('token')){
+                return true;
+            }else{
+                return false;
+            }
+        },
+        isAdmin: () => {
+
+            if(localStorage.getItem('admin') === 'true'){
+                return true;
+            }else{
+                return false
+            }
+        
+        },
+        userLogued(){
+            if(localStorage.getItem('token')){
+                return true;
+            }else{
+                return false;
+            }
+        },
     }
 
 }

@@ -3,8 +3,9 @@ import Home from '../views/Home';
 
 import Workers from '../views/Workers';
 import AddWorker from '../views/AddWorker';
+import Login from '../views/Login'
+import guardAuth from "../guards/guardAuth";
 
-import Login from '../views/Login';
 
 import CourtList from '../views/CourtList';
 import CourtAdd from '../views/CourtAdd';
@@ -12,6 +13,7 @@ import UpdateCourt from '../views/UpdateCourt';
 
 import RentList from '../views/RentList';
 
+ 
 const routes = [
 
     {
@@ -28,7 +30,8 @@ const routes = [
         component:Workers,
         meta:{
             title:'Workers'
-        }
+        } ,
+        beforeEnter: guardAuth.isAdmin 
     },
     {
         path:'/court',
@@ -36,7 +39,8 @@ const routes = [
         component:CourtList,
         meta:{
             title:'Courts'
-        }
+        },
+        beforeEnter: guardAuth.workerAuthenticated 
     },
     { 
         path:'/court/add', 
@@ -68,7 +72,8 @@ const routes = [
         component:AddWorker,
         meta:{
             title:'Add worker'
-        }
+        } ,
+        beforeEnter: guardAuth.isAdmin 
     },
     {
         path:'/login',

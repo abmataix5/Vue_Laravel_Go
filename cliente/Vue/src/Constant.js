@@ -7,6 +7,7 @@ export default {
     DELETE_WORKER : "deleteWorker",
     INITIALIZE_WORKERITEM : "initializeUserItem",
     LOGIN_WORKER : "loginWorker",
+    LOGIN_LARAVEL_WORKER : "loginLaravelWorker",
 
     /* Courts */
 

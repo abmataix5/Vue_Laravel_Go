@@ -20,7 +20,7 @@ use App\Http\Controllers\CourtController;
     return $request->user();
 });
 Route::resource('courts', CourtController::class);
-
+Route::post('/login', [AuthController::class, 'login']);
 
 //NEW ADD FOR LOGIN
 // Route::group(['prefix' => 'auth', 'middleware' => 'jwt.verify'], function () {
@@ -32,12 +32,13 @@ Route::resource('courts', CourtController::class);
 
 // Route::post('register', 'UserController@store')->name('users.store');
 // Route::post('login', 'UserController@login')->name('users.login');
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 
 ], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
+    // Route::post('login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);

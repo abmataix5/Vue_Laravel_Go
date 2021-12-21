@@ -25,6 +25,15 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request){
+
+        ///DEBUG
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln("---------------LOGIN-------------------");
+        $out->writeln("ENTRA LOGIN");
+      
+        $out->writeln("---------------LOGIN-------------------");
+        /////DEBUG
+
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
@@ -107,6 +116,13 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     protected function createNewToken($token){
+         ///DEBUG
+         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $out->writeln("---------------LOGIN-------------------");
+         $out->writeln($token);
+       
+         $out->writeln("---------------LOGIN-------------------");
+         /////DEBUG
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

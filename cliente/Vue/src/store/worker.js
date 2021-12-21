@@ -30,6 +30,19 @@ export const workerStore = {
 
             state.user = payload;
             console.log(state.user.admin);  /* Guardamos en el state el usuario logueado */
+        },
+        [Constant.LOGIN_LARAVEL_WORKER]: (state, payload) => {
+            console.log("ENTRA MUTATIONS LOGIN LARAVEL WORKERS");
+
+            console.log(state)
+            console.log(payload)
+            console.log(payload.access_token)
+   
+            setStore('token', payload.acces_token); /* Guardamos token en localstorage */
+            // setStore('admin', payload.admin); /* Guardamos si es admin o no */
+
+            state.user = payload;
+            console.log(state.user);  /* Guardamos en el state el usuario logueado */
         }
     },
     actions: {
@@ -73,11 +86,25 @@ export const workerStore = {
                 })
         },
         [Constant.LOGIN_WORKER]: (store,payload) => {
-            console.log(payload)
+            console.log(payload.workeritem)
             UserService.loginWorker(payload.workeritem)
                 .then(function (worker_logued) {
                     console.log(worker_logued.data.response)
                     store.commit(Constant.LOGIN_WORKER, worker_logued.data.response);
+                   
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        },
+        [Constant.LOGIN_LARAVEL_WORKER]: (store,payload) => {
+            console.log("ENTRA LOGIN LARAVEL WORKERS");
+            console.log(payload.workeritem)
+            UserService.loginLaravelWorker(payload.workeritem)
+                .then(function (data) {
+                    console.log("vuelve LoginWorkerLaravel")
+                    console.log(data.data)
+                    store.commit(Constant.LOGIN_LARAVEL_WORKER, data.data);
                    
                 })
                 .catch(function (error) {

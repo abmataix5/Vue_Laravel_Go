@@ -82,7 +82,15 @@ const routes = [
         meta:{
             title:'Login'
         }
-    }
+    },
+    {
+        path:'/loginLaravel',
+        name: 'LoginLaravel',
+        component:Login,
+        meta:{
+            title:'LoginLaravel'
+        }
+    },
 
 
 ]

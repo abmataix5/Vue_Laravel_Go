@@ -39,7 +39,7 @@
 import useVuelidate from "@vuelidate/core";
 import { reactive, computed } from "vue";
 import { required, email, minLength } from "@vuelidate/validators";
-import router from '@/router'
+// import router from '@/router'
 import { useStore } from "vuex";
 import Constant from "../Constant";
 
@@ -74,17 +74,30 @@ export default {
   methods: {
 
     onSubmit() {
-
+      console.log("entra onsubmit");
       this.v$.$validate();
       console.log(this.v$.$error);
       if (!this.v$.$error) {
-   
-          this.store.dispatch("worker/" + Constant.LOGIN_WORKER, {
+    
+          console.log(this.$route.name);
+
+          if(this.$route.name === "LoginLaravel"){
+            
+            this.store.dispatch("worker/" + Constant.LOGIN_LARAVEL_WORKER, {
             workeritem: this.state.form,
-          });
+            });
+
+          }else{
+            this.store.dispatch("worker/" + Constant.LOGIN_WORKER, {
+            workeritem: this.state.form,
+            });
+          }
+          
+          
+          
         alert("Usuario logueado");
-     location.reload();
-        router.push('/');
+    //  location.reload();
+        // router.push('/');
       } else {
       
         alert("Error login");

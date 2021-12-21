@@ -1,4 +1,5 @@
 import ApiGo from '@/services/Api.go'
+import ApiLaravel from './Api.laravel';
 
  export default {
 
@@ -20,6 +21,11 @@ import ApiGo from '@/services/Api.go'
   },
   loginWorker(data){
     return ApiGo().post('login', data)
+  },
+  loginLaravelWorker(params){
+    console.log("userService.loginLaravelWorkers")
+    console.log(params)
+    return ApiLaravel().post(`login/`, params)
   },
  } 
 

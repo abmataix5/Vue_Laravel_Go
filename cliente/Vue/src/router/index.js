@@ -1,16 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from '../views/Home';
-
 import Workers from '../views/Workers';
 import AddWorker from '../views/AddWorker';
 import Login from '../views/Login'
 import guardAuth from "../guards/guardAuth";
-
-
 import CourtList from '../views/CourtList';
 import CourtAdd from '../views/CourtAdd';
 import UpdateCourt from '../views/UpdateCourt';
-
 import RentList from '../views/RentList';
 
  

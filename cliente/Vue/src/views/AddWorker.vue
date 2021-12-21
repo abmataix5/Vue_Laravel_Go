@@ -105,7 +105,7 @@
 import useVuelidate from "@vuelidate/core";
 import { reactive, computed } from "vue";
 import { required, email, minLength } from "@vuelidate/validators";
-
+import router from '@/router'
 import { useStore } from "vuex";
 import Constant from "../Constant";
 
@@ -192,7 +192,7 @@ export default {
             workeritem: this.state.form,
         });
         alert("Usuario registrado");
-
+   router.push('/workers');
       } else {
       
         alert("Error");

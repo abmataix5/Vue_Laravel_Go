@@ -7,6 +7,7 @@ import guardAuth from "../guards/guardAuth";
 import CourtList from '../views/CourtList';
 import CourtAdd from '../views/CourtAdd';
 import UpdateCourt from '../views/UpdateCourt';
+import PartnerList from '../views/PartnerList';
 import RentList from '../views/RentList';
 
  
@@ -28,6 +29,15 @@ const routes = [
             title:'Workers'
         } ,
         beforeEnter: guardAuth.isAdmin 
+    },
+    {
+        path:'/partner',
+        name: 'partnerList',
+        component:PartnerList,
+        meta:{
+            title:'Partner'
+        },
+        // beforeEnter: guardAuth.workerAuthenticated 
     },
     {
         path:'/court',

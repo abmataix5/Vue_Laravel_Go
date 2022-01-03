@@ -38,7 +38,7 @@ export const workerStore = {
             console.log(payload)
             console.log(payload.access_token)
    
-            setStore('token', payload.acces_token); /* Guardamos token en localstorage */
+            setStore('token', payload.access_token); /* Guardamos token en localstorage */
             // setStore('admin', payload.admin); /* Guardamos si es admin o no */
 
             state.user = payload;

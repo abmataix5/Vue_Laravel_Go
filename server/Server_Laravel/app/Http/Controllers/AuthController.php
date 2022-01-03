@@ -105,6 +105,10 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function userProfile() {
+          ///DEBUG
+          $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+          $out->writeln("---------------USERPROFILE-------------------");
+          /////DEBUG
         return response()->json(auth()->user());
     }
 

@@ -14,6 +14,9 @@
                     <router-link class="nav-link" to="/rent">Reservas</router-link>
                 </li>
                 <li class="nav-item">
+                    <router-link class="nav-link" to="/partner">Listado de Socios</router-link>
+                </li>
+                <li class="nav-item">
                     <router-link class="nav-link" to="/workers">Listado de trabajadores</router-link>
                 </li>
                 <li class="nav-item">

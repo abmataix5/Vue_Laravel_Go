@@ -4,7 +4,7 @@ export default{
 
     get() {
       console.log("ENTRA GET APILARAVEL");
-      return Apilaravel().get(`user-profile/`);
+      return Apilaravel().get(`users/`);
     },
     add(params) {
       console.log("apiservice add");

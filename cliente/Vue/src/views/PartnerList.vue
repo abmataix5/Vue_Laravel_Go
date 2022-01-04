@@ -35,7 +35,7 @@ export default {
         store.dispatch(Constant.INITIALIZE_PARTNERITEM)
         
         const partnerlist = computed(() => store.getters["partner/getPartners"])        
-        
+        // console.log(partnerlist)
         const goAddPartner = () => {
             console.log("DENTRO ADD PARTNER");
             store.dispatch(Constant.INITIALIZE_PARTNERITEM);

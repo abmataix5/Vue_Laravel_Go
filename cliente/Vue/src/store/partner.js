@@ -22,17 +22,17 @@ export const partnerStore = {
         },
         [Constant.INITIALIZE_PARTNERITEM]: (state, payload) => {
             console.log("ENTRA MUTATIONS INITAILIZE");
-            // if (payload) {
-            //     console.log("AAAAA");
-                console.log(state);
-                // console.log("payload data: ")
-                console.log(payload.data);
-            //     state.partnerlist = payload.data;
-            // } else {
+            if (payload) {
+                console.log("AAAAA");
+             
+                console.log("payload data: ")
+                console.log(payload.data)
+                state.partnerlist = payload.data;
+            } else {
 
-            //     //CAMBIAR POR EL MODELO PARTNER
-            //     state.partnerlist = { name: "",schedule: "",date: "", A_drive: "",A_reves: "", B_drive: "",B_reves: "" };
-            // }
+                //CAMBIAR POR EL MODELO PARTNER
+                state.partnerlist = { id: "", name: "",email: ""};
+            }
         }
     },
     actions: {
@@ -54,10 +54,10 @@ export const partnerStore = {
         
         initializePartnerItem(store){
             console.log("INITIALIZE");
-            PartnerService.get("/partner")
+            PartnerService.get()
                 .then(function (data_partner) {
                     console.log("INIT PARTNERITEM!");
-                    
+                    console.log(data_partner.data.data)
                     store.commit(Constant.INITIALIZE_PARTNERITEM, data_partner.data);
                    
                 })
@@ -93,7 +93,7 @@ export const partnerStore = {
         },
     },
     getters: {
-        getPartner(state) {
+        getPartners(state) {
             console.log(state.partnerlist);
             return state.partnerlist;
         }

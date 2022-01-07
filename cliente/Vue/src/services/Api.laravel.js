@@ -18,10 +18,27 @@ export default () => {
   axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
+      console.log("VALOR ERROR RECIBIDO");
+      console.log(error);
+      console.log(error.message);
+      
       if (error.response.status === 401) {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         location.reload()
+      }
+      if (error.response.status === 202) {
+        // localStorage.removeItem('token')
+        // localStorage.removeItem('user')
+        // location.reload()
+        console.log("usuario eliminado")
+      }
+
+      if (error.response.status === 500) {
+        // localStorage.removeItem('token')
+        // localStorage.removeItem('user')
+        // location.reload()
+        console.log("usuario Creado")
       }
       return Promise.reject(error) 
     }

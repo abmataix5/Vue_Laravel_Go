@@ -60,8 +60,9 @@ export const partnerStore = {
             PartnerService.get()
                 .then(function (data_partner) {
                     console.log("INIT PARTNERITEM!");
+                    console.log(data_partner)
                     console.log(data_partner.data.data)
-                    store.commit(Constant.INITIALIZE_PARTNERITEM, data_partner.data);
+                    store.commit(Constant.INITIALIZE_PARTNERITEM, data_partner.data.data);
                    
                 })
                 .catch(function (error) {
@@ -73,6 +74,7 @@ export const partnerStore = {
             PartnerService.delete(payload.id)
                     .then(function (res) {
                         console.log(res);
+                        console.log(res.message)
                         store.commit(Constant.DELETE_PARTNER, payload);
                     }
                     )

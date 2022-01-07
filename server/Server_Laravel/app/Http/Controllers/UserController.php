@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest; 
+
+use App\Traits\ApiResponseTrait;
+
 use App\Models\User;
 
 class UserController extends Controller
 {
+
+    use ApiResponseTrait;
+
+
     /**
      * Display a listing of the resource.
      *
@@ -20,11 +27,11 @@ class UserController extends Controller
     {
         ///DEBUG
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------USER-------------------");
+        $out->writeln("---------------USER LIST-------------------");
         /////DEBUG
-        // return UserResource::collection(User::get());
-        return new UserCollection(User::get());
-        //
+
+        return self::apiResponseSuccess(new UserCollection(User::get()), 'Listado Socios');
+    
     }
 
     /**
@@ -56,10 +63,7 @@ class UserController extends Controller
          $user->email = $request->email;
          $user->password = $request->password;
          $user->save();
-         return response()->json([
-             "message" => "Socio registrado correctamente"
-         ], 201);
-
+         return self::apiResponseSuccess($data, 'Socio registrado correctamente');
     }
 
     /**
@@ -104,16 +108,12 @@ class UserController extends Controller
             $user->id = $request->id;
             $user->name = $request->name;
             $user->email = $request->email;
-          
+
             $user->save();
-            return response()->json([
-              "message" => "Socio actualizado correctamente"
-            ], 200);
-          } else {
-            return response()->json([
-              "message" => "court not found"
-            ], 404);
-          }
+            return self::apiResponseSuccess($id, 'Socio actualizado correctamente');
+        } else {
+            return self::apiResponseNotFound($id, 'usuario no encontrado');
+        }
 
         //
     }
@@ -126,7 +126,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
         ///DEBUG
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $out->writeln("---------------DELETE USER-------------------");
@@ -135,13 +134,11 @@ class UserController extends Controller
         if(User::where('id', $id)->exists()) {
             $user = User::find($id);
             $user->delete();
-            return response()->json([
-              "message" => "usuario eliminado"
-            ], 202);
+
+          return self::apiResponseSuccess($id, 'Socio eliminado correctamente');
           } else {
-            return response()->json([
-              "message" => "usuario no encontrado"
-            ], 404);
+
+            return self::apiResponseNotFound($id, 'usuario no encontrado');
           }
     }
 }

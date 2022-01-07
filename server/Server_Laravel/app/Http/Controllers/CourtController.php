@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CourtResource;
 use App\Http\Resources\CourtCollection;
 use App\Http\Requests\StoreCourtRequest; 
-use App\Models\Court;
 
+use App\Traits\ApiResponseTrait;
+
+use App\Models\Court;
 
 class CourtController extends Controller
 {
+
+  use ApiResponseTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -25,16 +30,12 @@ class CourtController extends Controller
         $out->writeln("--------------- LIST COURT -------------------");
         $out->writeln($res);
         /////DEBUG
-        
 
-
-
-        $page = $request->has('page') ? $request->get('page') : 1;
-        $limit = $request->has('limit') ? $request->get('limit') : 3;
+        // $page = $request->has('page') ? $request->get('page') : 1;
+        // $limit = $request->has('limit') ? $request->get('limit') : 3;
         // return CourtResource::collection(Court::limit($limit)->offset(($page - 1) * $limit)->get());
-        $courts= Court::get();
-        return new CourtCollection($courts);
-
+       
+        return self::apiResponseSuccess(new CourtCollection(Court::get()), 'Listado Pistas');
     }
 
     /**
@@ -69,9 +70,8 @@ class CourtController extends Controller
          $court->B_drive = $request->B_drive;
          $court->B_reves = $request->B_reves;
          $court->save();
-         return response()->json([
-             "message" => "court record created"
-         ], 201);
+
+         return self::apiResponseSuccess($data, 'Pista creada correctamente');
 
        /*  return CourtResource::make(Court::create($request->validated())); */
 
@@ -85,8 +85,7 @@ class CourtController extends Controller
      */
     public function show($id)
     {
-        
-        return CourtResource::make(Court::where('id', $id)->firstOrFail());
+        // 
     }
 
     /**
@@ -120,15 +119,11 @@ class CourtController extends Controller
             $court->B_drive = $request->B_drive;
             $court->B_reves = $request->B_reves;
             $court->save();
-            return response()->json([
-              "message" => "court updated successfully"
-            ], 200);
-          } else {
-            return response()->json([
-              "message" => "court not found"
-            ], 404);
-          }
+            return self::apiResponseSuccess($id, 'Pista actualizada correctamente');
 
+          } else {
+            return self::apiResponseNotFound($id, 'Pista no encontrada');
+          }
     }
 
     /**
@@ -143,14 +138,10 @@ class CourtController extends Controller
         if(Court::where('id', $id)->exists()) {
             $court = Court::find($id);
             $court->delete();
-            return response()->json([
-              "message" => "court deleted"
-            ], 202);
-          } else {
-            return response()->json([
-              "message" => "court not found"
-            ], 404);
-          }
+            return self::apiResponseSuccess($id, 'Pista eliminada correctamente');
+        } else {
+            return self::apiResponseNotFound($id, 'Pista no encontrado');
+        }
 
     }
 }

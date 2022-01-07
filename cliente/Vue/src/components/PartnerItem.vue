@@ -34,7 +34,7 @@ export default {
        console.log("delete");
             
        console.log(id);
-       store.dispatch("partner/"+Constant.DELETE_PARTNER, { id });
+       store.dispatch(Constant.DELETE_PARTNER, { id });
     };
     const editPartner = (id) => {
             console.log("EDIT PARTNER");

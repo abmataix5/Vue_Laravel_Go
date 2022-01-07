@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest; 
 use App\Models\User;
 
@@ -21,7 +22,8 @@ class UserController extends Controller
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $out->writeln("---------------USER-------------------");
         /////DEBUG
-        return UserResource::collection(User::get());
+        // return UserResource::collection(User::get());
+        return new UserCollection(User::get());
         //
     }
 
@@ -125,5 +127,21 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        ///DEBUG
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln("---------------DELETE USER-------------------");
+        /////DEBUG
+        
+        if(User::where('id', $id)->exists()) {
+            $user = User::find($id);
+            $user->delete();
+            return response()->json([
+              "message" => "usuario eliminado"
+            ], 202);
+          } else {
+            return response()->json([
+              "message" => "usuario no encontrado"
+            ], 404);
+          }
     }
 }

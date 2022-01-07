@@ -26,6 +26,7 @@ export const courtStore = {
                 console.log("AAAAA");
                 console.log(state);
                 console.log("payload data: ")
+                // console.log(payload.data);
                 console.log(payload.data);
                 state.courtlist = payload.data;
             } else {

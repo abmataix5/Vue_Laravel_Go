@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\CourtResource;
+use App\Http\Resources\CourtCollection;
 use App\Http\Requests\StoreCourtRequest; 
 use App\Models\Court;
 
@@ -18,10 +19,21 @@ class CourtController extends Controller
      */
     public function index(Request $request)
     {
+      $res= Court::get();
+        ///DEBUG
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln("--------------- LIST COURT -------------------");
+        $out->writeln($res);
+        /////DEBUG
         
+
+
+
         $page = $request->has('page') ? $request->get('page') : 1;
-        $limit = $request->has('limit') ? $request->get('limit') : 10;
-        return CourtResource::collection(Court::limit($limit)->offset(($page - 1) * $limit)->get());
+        $limit = $request->has('limit') ? $request->get('limit') : 3;
+        // return CourtResource::collection(Court::limit($limit)->offset(($page - 1) * $limit)->get());
+        $courts= Court::get();
+        return new CourtCollection($courts);
 
     }
 
@@ -75,9 +87,6 @@ class CourtController extends Controller
     {
         
         return CourtResource::make(Court::where('id', $id)->firstOrFail());
-
-        
-
     }
 
     /**

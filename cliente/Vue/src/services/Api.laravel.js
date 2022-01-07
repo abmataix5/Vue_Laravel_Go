@@ -5,6 +5,15 @@ export default () => {
     baseURL: "http://0.0.0.0:8000/api"
   })
 
+  /* Enviamos token */
+
+  const token = localStorage.getItem('token')
+  if (token ) {
+    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    console.log("Token enviado");
+    console.log(token);
+
+  } 
 
   axiosInstance.interceptors.response.use(
     (response) => response,

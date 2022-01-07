@@ -8,6 +8,8 @@ import CourtList from '../views/CourtList';
 import CourtAdd from '../views/CourtAdd';
 import UpdateCourt from '../views/UpdateCourt';
 import PartnerList from '../views/PartnerList';
+import AddPartner from '../views/AddPartner';
+import UpdatePartner from '../views/UpdatePartner';
 import RentList from '../views/RentList';
 
  
@@ -36,6 +38,23 @@ const routes = [
         component:PartnerList,
         meta:{
             title:'Partner'
+        },
+        // beforeEnter: guardAuth.workerAuthenticated 
+    },
+    { 
+        path:'/partner/add', 
+        name:'partnerAdd', 
+        component: AddPartner,
+        meta:{
+            title:'AddPartner'
+        } 
+    },
+    {
+        path:'/partner/update/:id', 
+        name: 'updatePartner',
+        component:UpdatePartner,
+        meta:{
+            title:'UpdatePartner'
         },
         // beforeEnter: guardAuth.workerAuthenticated 
     },

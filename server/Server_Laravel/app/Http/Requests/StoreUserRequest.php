@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Requests;
-use App\Models\Court;
+
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StoreCourtRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,14 +28,14 @@ class StoreCourtRequest extends FormRequest
      */
     public function rules()
     {
+         ///DEBUG
+         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $out->writeln("---------------REQUEST-------------------");
+         /////DEBUG
         return [
             "name" => ["required"],
-            "schedule" => ["required"],
-            "date" => ["required"],
-            // "A_drive" => ["optional"],
-            // "A_reves" => ["optional"],
-            // "B_drive" => ["optional"],
-            // "B_reves" => ["optional"],
+            "email" => ["required"],
+            "password" => ["required"],
         ];
     }
 
@@ -53,6 +55,4 @@ class StoreCourtRequest extends FormRequest
             ], 400));
        }
     }
-
-
 }

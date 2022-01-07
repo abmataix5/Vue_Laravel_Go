@@ -41,9 +41,23 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+         ///DEBUG
+         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $out->writeln("---------------USER_STORE-------------------");
+         $out->writeln($request);
+         /////DEBUG
+         $user = new User;
+        //  $user->id = $request->id;
+         $user->name = $request->name;
+         $user->email = $request->email;
+         $user->password = $request->password;
+         $user->save();
+         return response()->json([
+             "message" => "Socio registrado correctamente"
+         ], 201);
+
     }
 
     /**
@@ -82,6 +96,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        if (user::where('id', $id)->exists()) {
+            $user = User::find($id);
+            $user->id = $request->id;
+            $user->name = $request->name;
+            $user->email = $request->email;
+          
+            $user->save();
+            return response()->json([
+              "message" => "Socio actualizado correctamente"
+            ], 200);
+          } else {
+            return response()->json([
+              "message" => "court not found"
+            ], 404);
+          }
+
         //
     }
 

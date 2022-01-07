@@ -41,9 +41,13 @@ class CourtController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCourtRequest $request)
     {
         
+         ///DEBUG
+         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $out->writeln("---------------STORE COURT CONTROLLER-------------------");
+         /////DEBUG
          $court = new Court;
          $court->name = $request->name;
          $court->schedule = $request->schedule;

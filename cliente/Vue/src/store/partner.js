@@ -39,7 +39,10 @@ export const partnerStore = {
 
         addPartner(store,payload){
             console.log("ACTION ADDPARTNER");
+            //EL valor password está en default. Ya que los socios son registrados por personal autorizado.
+            payload.partneritem.password= "default";
             console.log(payload.partneritem);
+            
             PartnerService.add(payload.partneritem)
             .then(function (data_partner) {
                 console.log("ACTION ADDPARTNER .THEN");
@@ -80,6 +83,7 @@ export const partnerStore = {
         updatePartner(store, payload){
             console.log("ACTION UPDATE PARTNER");
             console.log(payload);
+         
             PartnerService.update(payload.partneritem.id, payload.partneritem)
                     .then(function (res) {
                         console.log(res);

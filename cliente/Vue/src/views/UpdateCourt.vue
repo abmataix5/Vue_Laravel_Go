@@ -63,7 +63,7 @@ export default {
         console.log(store.state.court.courtlist[0].id);
         console.log(currentRoute.params.id);
        
-        const courtitem = store.state.court.courtlist.find((item)=> item.id === currentRoute.params.id)
+        const courtitem = store.state.court.courtlist.find((item)=> item.id == currentRoute.params.id)
         console.log(courtitem);
         const state = reactive({ 
             courtitemlocal : { ...courtitem } 

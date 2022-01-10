@@ -4,12 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sendgrid/sendgrid-go"
+	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/victorsteven/forum/api/auth"
 	"github.com/victorsteven/forum/api/models"
 	"github.com/victorsteven/forum/api/security"
@@ -54,6 +58,7 @@ func (server *Server) CreateUser(c *gin.Context) {
 	}
 
 	userCreated, err := user.SaveUser(server.DB)
+	fmt.Print(userCreated.ID)
 	if err != nil {
 		formattedError := formaterror.FormatError(err.Error())
 		errList = formattedError
@@ -62,11 +67,30 @@ func (server *Server) CreateUser(c *gin.Context) {
 			"error":  errList,
 		})
 		return
+	} else {
+
+		from := mail.NewEmail("Example User", user.Email)
+		subject := "Alta Nuevo Trabajador"
+		to := mail.NewEmail("Administrador MyPadel", user.Email)
+		plainTextContent := "Has sido registrado como nuevo trabajador! Esta es tu información:"
+		htmlContent := "<strong>Has sido registrado como nuevo trabajador! Esta es tu información:</strong>"
+		message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+		client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
+		response, err := client.Send(message)
+		if err != nil {
+			log.Println(err)
+		} else {
+			fmt.Println(response.StatusCode)
+			fmt.Println(response.Body)
+			fmt.Println(response.Headers)
+		}
+
+		c.JSON(http.StatusCreated, gin.H{
+			"status":   http.StatusCreated,
+			"response": userCreated,
+		})
 	}
-	c.JSON(http.StatusCreated, gin.H{
-		"status":   http.StatusCreated,
-		"response": userCreated,
-	})
+
 }
 
 func (server *Server) GetUsers(c *gin.Context) {

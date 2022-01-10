@@ -9,13 +9,21 @@ use App\Http\Resources\CourtCollection;
 use App\Http\Requests\StoreCourtRequest; 
 
 use App\Traits\ApiResponseTrait;
+use App\Repositories\CourtRepository;
 
 use App\Models\Court;
 
 class CourtController extends Controller
 {
 
-  use ApiResponseTrait;
+    use ApiResponseTrait;
+    public $courtRepository;
+
+    public function __construct(CourtRepository $courtRepository)
+    {
+        $this->courtRepository = $courtRepository;
+        // $this->not_found = Response::HTTP_NOT_FOUND;
+    }
 
     /**
      * Display a listing of the resource.
@@ -24,18 +32,16 @@ class CourtController extends Controller
      */
     public function index(Request $request)
     {
-      $res= Court::get();
+        $data= $this->courtRepository->all();;
+       
         ///DEBUG
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("--------------- LIST COURT -------------------");
-        $out->writeln($res);
+        $out->writeln("--------------- LIST COURTS -------------------");
+        $out->writeln($data);
         /////DEBUG
-
-        // $page = $request->has('page') ? $request->get('page') : 1;
-        // $limit = $request->has('limit') ? $request->get('limit') : 3;
-        // return CourtResource::collection(Court::limit($limit)->offset(($page - 1) * $limit)->get());
        
-        return self::apiResponseSuccess(new CourtCollection(Court::get()), 'Listado Pistas');
+        return self::apiResponseSuccess(new CourtCollection($data), 'Listado Pistas');
+
     }
 
     /**
@@ -56,25 +62,12 @@ class CourtController extends Controller
      */
     public function store(StoreCourtRequest $request)
     {
-        
-         ///DEBUG
-         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $out->writeln("---------------STORE COURT CONTROLLER-------------------");
-         /////DEBUG
-         $court = new Court;
-         $court->name = $request->name;
-         $court->schedule = $request->schedule;
-         $court->date = $request->date;
-         $court->A_drive = $request->A_drive;
-         $court->A_reves = $request->A_reves;
-         $court->B_drive = $request->B_drive;
-         $court->B_reves = $request->B_reves;
-         $court->save();
-
-         return self::apiResponseSuccess($data, 'Pista creada correctamente');
-
-       /*  return CourtResource::make(Court::create($request->validated())); */
-
+        ///DEBUG
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln("---------------STORE COURT CONTROLLER-------------------");
+    
+        $data = $this->courtRepository->create($request->all());
+        return self::apiResponseSuccess($data, 'Pista creada correctamente');
     }
 
     /**
@@ -108,21 +101,12 @@ class CourtController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        if (Court::where('id', $id)->exists()) {
-            $court = Court::find($id);
-            $court->name = $request->name;
-            $court->schedule = $request->schedule;
-            $court->date = $request->date;
-            $court->A_drive = $request->A_drive;
-            $court->A_reves = $request->A_reves;
-            $court->B_drive = $request->B_drive;
-            $court->B_reves = $request->B_reves;
-            $court->save();
-            return self::apiResponseSuccess($id, 'Pista actualizada correctamente');
+          $data = $this->courtRepository->update($id,$request->all());
 
+          if(is_null($data)){
+              return self::apiResponseNotFound($id, 'Pista no encontrada');
           } else {
-            return self::apiResponseNotFound($id, 'Pista no encontrada');
+              return self::apiResponseSuccess($id, 'Pista actualizada correctamente');
           }
     }
 
@@ -134,14 +118,20 @@ class CourtController extends Controller
      */
     public function destroy($id)
     {
-        
-        if(Court::where('id', $id)->exists()) {
-            $court = Court::find($id);
-            $court->delete();
-            return self::apiResponseSuccess($id, 'Pista eliminada correctamente');
-        } else {
-            return self::apiResponseNotFound($id, 'Pista no encontrado');
-        }
+      $data = $this->courtRepository->delete($id);
+      if(is_null($data)){
+        return self::apiResponseNotFound($id, 'Pista no encontrada');
+    } else {
+        return self::apiResponseSuccess($id, 'Pista actualizada correctamente');
+    }
+      
+      // if(Court::where('id', $id)->exists()) {
+      //       $court = Court::find($id);
+      //       $court->delete();
+      //       return self::apiResponseSuccess($id, 'Pista eliminada correctamente');
+      //   } else {
+      //       return self::apiResponseNotFound($id, 'Pista no encontrado');
+      //   }
 
     }
 }

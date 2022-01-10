@@ -52,6 +52,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        try{
          ///DEBUG
          $out = new \Symfony\Component\Console\Output\ConsoleOutput();
          $out->writeln("---------------USER_STORE-------------------");
@@ -63,7 +64,11 @@ class UserController extends Controller
          $user->email = $request->email;
          $user->password = $request->password;
          $user->save();
-         return self::apiResponseSuccess($data, 'Socio registrado correctamente');
+         return self::apiResponseSuccess($user, 'Socio registrado correctamente');
+
+        }catch(\Throwable|\Exception $e){
+            return self::apiResponseServerError($e, 'Error server interno.');
+        }
     }
 
     /**

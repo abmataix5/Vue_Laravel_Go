@@ -35,4 +35,13 @@ trait ApiResponseTrait {
         ], $code);
 	}
 
+    public static function apiResponseServerError($data, $message = "Internal Server Error")
+	{
+		return response()->json([
+            'status' => false,
+            'message' => $message,
+            'data' => $data,
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+	}
+
 }

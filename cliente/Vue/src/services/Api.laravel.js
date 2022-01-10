@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default () => {
   const axiosInstance = axios.create({
-    baseURL: "http://0.0.0.0:8000/api"
+    baseURL: "http://0.0.0.0:8001/api"
   })
 
   /* Enviamos token */
@@ -26,6 +26,7 @@ export default () => {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         location.reload()
+      
       }
       if (error.response.status === 202) {
         // localStorage.removeItem('token')

@@ -7,7 +7,7 @@ import (
 	"github.com/victorsteven/forum/api/common"
 )
 
-/* Serializador para devolver datos en el inicio de sesion */
+/* Serializer para devolver datos en el inicio de sesion */
 
 func (worker *Worker) SerializeWorkerLogin() common.JSON {
 
@@ -25,7 +25,7 @@ func (worker *Worker) SerializeWorkerLogin() common.JSON {
 	}
 }
 
-/* Serializador para devolver la información del trabajador */
+/* Serializer para devolver la información del trabajador */
 
 func (worker *Worker) SerializeWorkerInfo() common.JSON {
 

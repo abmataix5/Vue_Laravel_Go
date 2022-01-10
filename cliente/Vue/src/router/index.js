@@ -30,7 +30,7 @@ const routes = [
         meta:{
             title:'Workers'
         } ,
-        beforeEnter: guardAuth.isAdmin 
+        beforeEnter: guardAuth.workerAuthenticated 
     },
     {
         path:'/partner',

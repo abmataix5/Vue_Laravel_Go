@@ -67,13 +67,13 @@ func (server *Server) CreateUser(c *gin.Context) {
 			"error":  errList,
 		})
 		return
-	} else {
+	} else { /* Envia un email ala dirección del nuevo trabajador registrado por el administrador */
 
-		from := mail.NewEmail("Example User", user.Email)
+		from := mail.NewEmail("Administrador", user.Email)
 		subject := "Alta Nuevo Trabajador"
 		to := mail.NewEmail("Administrador MyPadel", user.Email)
-		plainTextContent := "Has sido registrado como nuevo trabajador! Esta es tu información:"
-		htmlContent := "<strong>Has sido registrado como nuevo trabajador! Esta es tu información:</strong>"
+		plainTextContent := ("Has sido registrado como nuevo trabajador! Esta es tu información:")
+		htmlContent := ("<strong>Has sido registrado como nuevo trabajador! Esta es tu información:</strong><br>Email del trabajador: " + user.Email + "<br> Username: " + user.Name + "<br> Para iniciar sesión:  " + "http://192.168.8.161:8080/login")
 		message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 		client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
 		response, err := client.Send(message)

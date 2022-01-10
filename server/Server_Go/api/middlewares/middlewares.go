@@ -30,7 +30,7 @@ func AdminAuthMiddleware() gin.HandlerFunc {
 	errList := make(map[string]string)
 	return func(c *gin.Context) {
 		err := auth.AdminValid(c.Request)
-		if err != nil {
+		if err != "true" {
 			errList["unauthorized"] = "Admin Unauthorized"
 			fmt.Println("Admin No autorizado")
 			c.JSON(http.StatusUnauthorized, gin.H{

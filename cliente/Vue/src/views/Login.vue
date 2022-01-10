@@ -39,7 +39,7 @@
 import useVuelidate from "@vuelidate/core";
 import { reactive, computed } from "vue";
 import { required, email, minLength } from "@vuelidate/validators";
-// import router from '@/router'
+ import router from '@/router'
 import { useStore } from "vuex";
 import Constant from "../Constant";
 
@@ -74,7 +74,7 @@ export default {
   methods: {
 
     onSubmit() {
-      console.log("entra onsubmit");
+   
       this.v$.$validate();
       console.log(this.v$.$error);
       if (!this.v$.$error) {
@@ -96,8 +96,8 @@ export default {
           
           
         alert("Usuario logueado");
-    //  location.reload();
-        // router.push('/');
+        location.reload();
+         router.push('/home');
       } else {
       
         alert("Error login");

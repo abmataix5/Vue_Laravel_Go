@@ -26,10 +26,16 @@
                     <router-link class="nav-link" to="/login" v-if="state.userLogued === false">Iniciar sesión</router-link>
                 </li>
                   <li class="nav-item">
-                    <router-link class="nav-link" to="/loginLaravel" >Iniciar sesión Laravel</router-link>
+                    <router-link class="nav-link" to="/loginLaravel" v-if="state.userLogued === false">Iniciar sesión Laravel</router-link>
                 </li>
                  <li class="nav-item">
                     <router-link class="nav-link" to="/login" v-if="state.userLogued === true" @click="checkOut">Cerrar sesión</router-link>
+                </li>
+                 <li class="nav-item text-white" v-if="state.userAdmin === true">
+                    Cuenta Administradora
+                </li>
+                 <li class="nav-item text-white" v-if="state.userAdmin === false">
+                    Cuenta Trabajador
                 </li>
             </ul>
         </div>
@@ -52,7 +58,8 @@ export default {
 
       const state = reactive({
 
-        userLogued: computed(() => store.getters["worker/userLogued"])
+        userLogued: computed(() => store.getters["worker/userLogued"]),
+        userAdmin: computed(() => store.getters["worker/isAdmin"]),
 
       });
 

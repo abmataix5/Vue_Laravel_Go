@@ -12,8 +12,8 @@ func (s *Server) initializeRoutes() {
 		v1.GET("/workers/:id", s.GetUser)
 		v1.POST("/workers/", s.CreateUser)
 		v1.POST("/login", s.Login)
-		v1.PUT("/workers/:id", middlewares.TokenAuthMiddleware(), s.UpdateUser)
-		v1.DELETE("/workers/:id", middlewares.TokenAuthMiddleware(), s.DeleteUser)
+		v1.PUT("/workers/:id", middlewares.TokenAuthMiddleware(), middlewares.AdminAuthMiddleware(), s.UpdateUser)    /* Comprueba el token y si es admin */
+		v1.DELETE("/workers/:id", middlewares.TokenAuthMiddleware(), middlewares.AdminAuthMiddleware(), s.DeleteUser) /* Comprueba el token y si es admin */
 
 	}
 }

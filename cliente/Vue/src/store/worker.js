@@ -128,6 +128,10 @@ export const workerStore = {
         },
         isAdmin: () => {
 
+            if(localStorage.getItem('admin') === null){
+                return null;
+            }
+
             if(localStorage.getItem('admin') === 'true'){
                 return true;
             }else{

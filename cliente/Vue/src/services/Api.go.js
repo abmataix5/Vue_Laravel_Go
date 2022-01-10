@@ -15,18 +15,14 @@ export default () => {
  
   } 
 
-/* Enviamos usuario */
-
- 
-  
  
   axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
       if (error.response.status === 401) {
-        localStorage.removeItem('token')
-        localStorage.removeItem('admin')
-        location.reload()
+      /*   localStorage.removeItem('token')
+        localStorage.removeItem('admin') */
+        window.alert("NO TIENES PERMISOS")
       }
       return Promise.reject(error) 
     }

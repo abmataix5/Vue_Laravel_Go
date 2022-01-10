@@ -32,7 +32,7 @@ class CourtController extends Controller
      */
     public function index(Request $request)
     {
-        $data= $this->courtRepository->all();;
+        $data= $this->courtRepository->all();
        
         ///DEBUG
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
@@ -116,22 +116,14 @@ class CourtController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
       $data = $this->courtRepository->delete($id);
       if(is_null($data)){
         return self::apiResponseNotFound($id, 'Pista no encontrada');
-    } else {
-        return self::apiResponseSuccess($id, 'Pista actualizada correctamente');
-    }
-      
-      // if(Court::where('id', $id)->exists()) {
-      //       $court = Court::find($id);
-      //       $court->delete();
-      //       return self::apiResponseSuccess($id, 'Pista eliminada correctamente');
-      //   } else {
-      //       return self::apiResponseNotFound($id, 'Pista no encontrado');
-      //   }
-
+      } else {
+        return self::apiResponseSuccess($id, 'Pista eliminada correctamente');
+      }
     }
 }

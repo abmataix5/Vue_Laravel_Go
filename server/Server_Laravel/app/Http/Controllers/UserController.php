@@ -9,6 +9,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest; 
 
 use App\Traits\ApiResponseTrait;
+use App\Repositories\UserRepository;
 
 use App\Models\User;
 
@@ -16,7 +17,13 @@ class UserController extends Controller
 {
 
     use ApiResponseTrait;
+    public $userRepository;
 
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+        // $this->not_found = Response::HTTP_NOT_FOUND;
+    }
 
     /**
      * Display a listing of the resource.
@@ -29,8 +36,9 @@ class UserController extends Controller
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $out->writeln("---------------USER LIST-------------------");
         /////DEBUG
-
-        return self::apiResponseSuccess(new UserCollection(User::get()), 'Listado Socios');
+        $data=$this->userRepository->all();
+    
+        return self::apiResponseSuccess(new UserCollection($data), 'Listado Socios');
     
     }
 
@@ -54,17 +62,13 @@ class UserController extends Controller
     {
         try{
          ///DEBUG
-         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $out->writeln("---------------USER_STORE-------------------");
-         $out->writeln($request);
+            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+            $out->writeln("---------------USER_STORE-------------------");
+            $out->writeln($request);
          /////DEBUG
-         $user = new User;
-        //  $user->id = $request->id;
-         $user->name = $request->name;
-         $user->email = $request->email;
-         $user->password = $request->password;
-         $user->save();
-         return self::apiResponseSuccess($user, 'Socio registrado correctamente');
+
+            $data = $this->userRepository->create($request->all());
+            return self::apiResponseSuccess($data, 'Socio registrado correctamente');
 
         }catch(\Throwable|\Exception $e){
             return self::apiResponseServerError($e, 'Error server interno.');
@@ -107,20 +111,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = $this->userRepository->update($id,$request->all());
 
-        if (user::where('id', $id)->exists()) {
-            $user = User::find($id);
-            $user->id = $request->id;
-            $user->name = $request->name;
-            $user->email = $request->email;
-
-            $user->save();
-            return self::apiResponseSuccess($id, 'Socio actualizado correctamente');
-        } else {
+        if(is_null($data)){
             return self::apiResponseNotFound($id, 'usuario no encontrado');
+        } else {
+            return self::apiResponseSuccess($id, 'Socio actualizado correctamente');
         }
-
-        //
     }
 
     /**
@@ -135,15 +132,20 @@ class UserController extends Controller
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $out->writeln("---------------DELETE USER-------------------");
         /////DEBUG
-        
-        if(User::where('id', $id)->exists()) {
-            $user = User::find($id);
-            $user->delete();
+        $data = $this->userRepository->delete($id);
+        if(is_null($data)){
+            return self::apiResponseNotFound($id, 'Socio no encontrado');
+        } else {
+            return self::apiResponseSuccess($id, 'Socio eliminado correctamente');
+        }
+        // if(User::where('id', $id)->exists()) {
+        //     $user = User::find($id);
+        //     $user->delete();
 
-          return self::apiResponseSuccess($id, 'Socio eliminado correctamente');
-          } else {
+        //   return self::apiResponseSuccess($id, 'Socio eliminado correctamente');
+        //   } else {
 
-            return self::apiResponseNotFound($id, 'usuario no encontrado');
-          }
+        //     return self::apiResponseNotFound($id, 'Socio no encontrado');
+        //   }
     }
 }

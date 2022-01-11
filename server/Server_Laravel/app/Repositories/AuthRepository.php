@@ -9,15 +9,8 @@ class AuthRepository{
 
     public function isAdmin($email)
     {
-
-         ///DEBUG
-         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $out->writeln("---------------IS_ADMIN_REPOSITORY-------------------");
-         $out->writeln($email);
-         $user= User::where('email',$email)->get();
-        //  $user= User::find($email);
-         $out->writeln("--------------- valor email -------------------");
-         $out->writeln($user);
+         $user= User::where('email',$email)->get(); // buscamos usuario por email.
+       
          if($user){
              return $user;
          }else{

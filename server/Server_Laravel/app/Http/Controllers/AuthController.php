@@ -8,12 +8,13 @@ use App\Models\User;
 use Validator;
 
 use App\Repositories\AuthRepository;
+use App\Traits\ApiResponseTrait;
 
 class AuthController extends Controller
 {
 
     public $authRepository;
-
+    use ApiResponseTrait;
 
 
     /**
@@ -119,17 +120,18 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    public function isAdmin(Request $request) {
+    public function isAdmin(Request $request) {  //go consulta este endpoint para saber el tipos de usuario auth(). 
         ///DEBUG
-        // $email="hache@gmail.com";
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $out->writeln("---------------IS_ADMIN-------------------");
-        // $out->writeln($request->email);
         /////DEBUG
-        $data=$this->authRepository->isAdmin($request->email);
 
-    //   return response()->json(auth()->user());
-    return $data;
+        $data=$this->authRepository->isAdmin($request->email);
+        if(is_null($data)){
+            return self::apiResponseNotFound($request->email, 'Usuario no encontrado');
+        }else{
+            return $data;
+        }    
     }
 
 

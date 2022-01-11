@@ -36,7 +36,6 @@ class StoreUserRequest extends FormRequest
             "name" => ["required"],
             "email" => ["required"],
             "password" => ["required"],
-            "admin" => ["required"],
         ];
     }
 

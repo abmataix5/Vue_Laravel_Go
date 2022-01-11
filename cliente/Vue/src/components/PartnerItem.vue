@@ -2,14 +2,17 @@
 
     <li >
         <span :class="{ pointer:true}">
-           ID del usuario : {{partneritem.id}}<br>
-           Nombre del usuario : {{partneritem.name}}<br>
-           Email: {{partneritem.email}}<br>
+           <strong>Num Socio : </strong>{{partneritem.id}}
+           <strong>Nombre : </strong>{{partneritem.name}}
+           <strong>Apellidos: </strong> {{partneritem.lastname}}
         </span>
         <div class="float-right">
+            <span class="btn btn-info   pointer ml-1" @click.stop="detailPartner(partneritem.id)">Ver Detalles</span> 
             <span class="btn btn-success   pointer ml-1" @click.stop="editPartner(partneritem.id)">Editar</span> 
             <span class="btn btn-danger pointer ml-1" @click.stop="deletePartner(partneritem.id)">Eliminar</span>
         </div>
+         <hr>
+  
     </li>
 
     
@@ -30,6 +33,12 @@ export default {
    const store = useStore();
    const router = useRouter();
 
+   const detailPartner = (id) => {
+      console.log("detail");
+       console.log(id);
+      router.push({ name: 'detailPartner', params: { id } })
+    };
+
    const deletePartner = (id) => {
        console.log("delete");
             
@@ -41,8 +50,8 @@ export default {
             // console.log(id)
             // store.dispatch(Constant.UPDATE_COURT, { courtitem: { ...props.courtitem } });
             router.push({ name: 'updatePartner', params: { id } })
-        }
-    return { deletePartner, editPartner }; 
+      }
+    return { deletePartner, editPartner, detailPartner }; 
   },
 };
 </script>

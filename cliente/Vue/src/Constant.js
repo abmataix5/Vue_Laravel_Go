@@ -26,6 +26,7 @@ export default {
     /* Partners */
 
     ADD_PARTNER : "partner/addPartner",
+    DETAIL_PARTNER : "partner/detailPartner",
     UPDATE_PARTNER : "partner/updatePartner",
     DELETE_PARTNER : "partner/deletePartner",
     INITIALIZE_PARTNERITEM : "partner/initializePartnerItem",

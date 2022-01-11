@@ -55,6 +55,7 @@ func (server *Server) Login(c *gin.Context) {
 		})
 		return
 	}
+	fmt.Print(userData)
 	c.JSON(http.StatusOK, gin.H{
 		"status":   http.StatusOK,
 		"response": userData,
@@ -76,6 +77,8 @@ func (server *Server) SignIn(email, password string) (map[string]interface{}, er
 		fmt.Println("Error password hashing: ", err)
 		return nil, err
 	}
+
+	fmt.Print(user.Admin)
 
 	return user.SerializeWorkerLogin(), nil
 }

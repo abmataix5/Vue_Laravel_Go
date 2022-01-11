@@ -308,3 +308,26 @@ func (server *Server) DeleteUser(c *gin.Context) {
 	}
 
 }
+
+/*
+func CheckAdmin(c *gin.Context) {
+
+	workerModel := models.Worker{}
+	var jsonData = []byte(`{
+	   		"email": "` + workerModel.Email + `"
+	   	}`)
+	isAdmin := workerModel.Admin
+
+	if isAdmin == "true" {
+		if data := postForm(jsonData); data != true {
+			c.JSON(http.StatusNotFound, gin.H{"message": "No es un administrador"})
+			return
+		}
+		serializer := workerModel.SerializeWorkerLogin()
+		c.JSON(http.StatusOK, gin.H{"user": serializer})
+		return
+	} else {
+		c.JSON(http.StatusNotFound, gin.H{"message": "No es un administrador"})
+
+	}
+} */

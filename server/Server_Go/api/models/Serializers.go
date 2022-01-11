@@ -22,6 +22,7 @@ func (worker *Worker) SerializeWorkerLogin() common.JSON {
 		"email":    worker.Email,
 		"token":    token,
 		"admin":    worker.Admin,
+		"admin2":   true,
 	}
 }
 

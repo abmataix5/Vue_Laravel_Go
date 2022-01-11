@@ -138,14 +138,5 @@ class UserController extends Controller
         } else {
             return self::apiResponseSuccess($id, 'Socio eliminado correctamente');
         }
-        // if(User::where('id', $id)->exists()) {
-        //     $user = User::find($id);
-        //     $user->delete();
-
-        //   return self::apiResponseSuccess($id, 'Socio eliminado correctamente');
-        //   } else {
-
-        //     return self::apiResponseNotFound($id, 'Socio no encontrado');
-        //   }
     }
 }

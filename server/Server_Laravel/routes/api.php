@@ -25,6 +25,7 @@ Route::resource('courts', CourtController::class);
 Route::resource('users', UserController::class);
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 //NEW ADD FOR LOGIN
 // Route::group(['prefix' => 'auth', 'middleware' => 'jwt.verify'], function () {
@@ -43,9 +44,9 @@ Route::group([
 
 ], function ($router) {
     // Route::post('login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
+    // Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);   
-     
+    Route::get('/isAdmin', [AuthController::class, 'isAdmin']);
 });

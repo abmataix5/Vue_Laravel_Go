@@ -7,16 +7,23 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
 
+use App\Repositories\AuthRepository;
 
 class AuthController extends Controller
 {
+
+    public $authRepository;
+
+
+
     /**
      * Create a new AuthController instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct(AuthRepository $authRepository) {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->authRepository = $authRepository;
     }
 
     /**
@@ -111,6 +118,21 @@ class AuthController extends Controller
           /////DEBUG
         return response()->json(auth()->user());
     }
+
+    public function isAdmin(Request $request) {
+        ///DEBUG
+        // $email="hache@gmail.com";
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln("---------------IS_ADMIN-------------------");
+        // $out->writeln($request->email);
+        /////DEBUG
+        $data=$this->authRepository->isAdmin($request->email);
+
+    //   return response()->json(auth()->user());
+    return $data;
+    }
+
+
 
     /**
      * Get the token array structure.

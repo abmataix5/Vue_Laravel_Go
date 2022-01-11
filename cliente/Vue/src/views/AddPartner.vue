@@ -12,8 +12,30 @@
           <input type="text" class="form-control" v-model="state.partneritemvalue.name" />
         </div>
         <div class="form-group">
+            <label htmlFor="lastname">Apellidos :</label>
+            <textarea class="form-control" rows="1" v-model="state.partneritemvalue.lastname"></textarea>  
+        </div>
+         <div class="form-group">
             <label htmlFor="email">Email :</label>
-             <input type="text" class="form-control" v-model="state.partneritemvalue.email" />
+            <textarea class="form-control" rows="1" v-model="state.partneritemvalue.email"></textarea>  
+        </div>
+         <div class="form-group">
+            <label htmlFor="phone">Telefono contacto :</label>
+            <textarea class="form-control" rows="1" v-model="state.partneritemvalue.phone"></textarea>  
+        </div>
+        <!-- <div class="form-group">
+            <label htmlFor="position">Posición :</label>
+            <textarea class="form-control" rows="1" v-model="state.partneritemvalue.position"></textarea>  
+        </div> -->
+        <div class="form-group">
+          <span>Posición:</span><br>
+          <select v-model="state.partneritemvalue.position">
+            <option disabled value="">Seleccione una posición</option>
+            <option>Drive</option>
+            <option>Revés</option>
+            <option>Ambas</option>s
+          </select>
+        
         </div>
          <!-- <div class="form-group">
             <label htmlFor="position">Position :</label>
@@ -44,7 +66,11 @@ export default {
         const state = reactive({ 
             partneritemvalue : { 
                 name: "",
-                email: "" }  
+                lastname:"",
+                email: "",
+                phone:"",
+                position:""
+                }  
         });
 
         const addPartner = () => {
@@ -54,7 +80,7 @@ export default {
 
           if (state.partneritemvalue.name != undefined) {
             store.dispatch(Constant.ADD_PARTNER, { partneritem : state.partneritemvalue })
-            router.push({ name:"partnerList" });
+            // router.push({ name:"partnerList" });
           } else {
             alert('Por favor Inserta Campos');
           }

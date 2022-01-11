@@ -55,7 +55,8 @@ export const partnerStore = {
         addPartner(store,payload){
             console.log("ACTION ADDPARTNER");
             //EL valor password está en default. Ya que los socios son registrados por personal autorizado.
-            payload.partneritem.password= "default";
+            payload.partneritem.password= "default"; //valor por defecto para los socios.
+            payload.partneritem.admin="false"; //valor por defecto para los socios.
             console.log(payload.partneritem);
             
             PartnerService.add(payload.partneritem)

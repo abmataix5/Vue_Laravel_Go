@@ -38,7 +38,7 @@ export default {
         // console.log(partnerlist)
         const goAddPartner = () => {
             console.log("DENTRO ADD PARTNER");
-            store.dispatch(Constant.INITIALIZE_PARTNERITEM);
+            // store.dispatch(Constant.INITIALIZE_PARTNERITEM);
             router.push({ name:"addPartner" });
         }
 

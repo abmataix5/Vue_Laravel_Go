@@ -11,16 +11,32 @@
           <label htmlFor="id"> ID:</label>
           <input type="text" class="form-control" v-model="state.partneritemlocal.id" readonly/>
         </div>
-
         <div class="form-group">
           <label htmlFor="name"> Nombre:</label>
           <input type="text" class="form-control" v-model="state.partneritemlocal.name" />
         </div>
-        <div class="form-group">
+         <div class="form-group">
+            <label htmlFor="lastname">Apellidos :</label>
+            <textarea class="form-control" rows="1" v-model="state.partneritemlocal.lastname"></textarea>  
+        </div>
+         <div class="form-group">
             <label htmlFor="email">Email :</label>
             <textarea class="form-control" rows="1" v-model="state.partneritemlocal.email"></textarea>  
         </div>
+         <div class="form-group">
+            <label htmlFor="phone">Telefono contacto :</label>
+            <textarea class="form-control" rows="1" v-model="state.partneritemlocal.phone"></textarea>  
+        </div>
+        <div class="form-group">
+          <span>Posición:</span><br>
+          <select v-model="state.partneritemlocal.position">
+            <option disabled value="">Seleccione una posición</option>
+            <option>Drive</option>
+            <option>Revés</option>
+            <option>Ambas</option>
+          </select>
         
+        </div>
         <div class="form-group">
             <button type="button" class="btn btn-primary m-1" @click="updatePartner">Update</button>
             <button type="button" class="btn btn-primary m-1" @click="cancel">Cancel</button>

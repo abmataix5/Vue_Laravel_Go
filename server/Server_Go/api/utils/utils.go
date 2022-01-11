@@ -1,10 +1,6 @@
 package utils
 
 import (
-	"bytes"
-	"fmt"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,7 +26,7 @@ func CheckAdmin(c *gin.Context) {
 	   	} */
 }
 
-func postForm(jsonData []byte) bool {
+/* func postForm(jsonData []byte) bool {
 
 	fmt.Println("http://0.0.0.0:8001/api/users/")
 
@@ -49,13 +45,13 @@ func postForm(jsonData []byte) bool {
 	fmt.Println("http.Status", http.StatusOK)
 
 	if response.Status == "200 OK" {
-		/* AÇÒ NO VA, HI HAURIA QUE COMPROBAR SI TORNA ALGO O QUÉ */
+
 		fmt.Println("TOT OK")
 		return true
 	} else {
 		fmt.Println("FAIL")
-		// err:= nil!=error
+
 		return false
 	}
 
-}
+} */

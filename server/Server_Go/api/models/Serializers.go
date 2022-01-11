@@ -22,6 +22,25 @@ func (worker *Worker) SerializeWorkerLogin() common.JSON {
 		"email":    worker.Email,
 		"token":    token,
 		"admin":    worker.Admin,
+		"admin2":   false,
+	}
+}
+
+/* Serializer para devolver datos en el inicio de sesión de un admin */
+
+func (worker *Worker) SerializeWorkerLoginAdmin() common.JSON {
+
+	token, err := auth.CreateToken(worker.ID)
+	if err != nil {
+		log.Fatal("Error generando el token", err)
+	}
+
+	return common.JSON{
+		"id":       worker.ID,
+		"username": worker.Name,
+		"email":    worker.Email,
+		"token":    token,
+		"admin":    worker.Admin,
 		"admin2":   true,
 	}
 }

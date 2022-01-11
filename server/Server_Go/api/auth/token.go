@@ -76,7 +76,7 @@ func ExtractTokenID(r *http.Request) (uint32, error) {
 	return 0, nil
 }
 
-/* Lo utilizamos para operaciones criticas, ademas de comproavr el token,para comprovar si es administrador */
+/* Lo utilizamos para operaciones criticas, ademas de comprovar el token,para comprovar si es administrador */
 
 func AdminValid(r *http.Request) string {
 	admin := r.Header.Get("Admin")
@@ -84,7 +84,7 @@ func AdminValid(r *http.Request) string {
 	fmt.Println(admin + "   Admin?")
 
 	if admin != "Admin false" {
-		fmt.Print("yeeeepa")
+		fmt.Print("Entra admin false")
 		return "true"
 	}
 

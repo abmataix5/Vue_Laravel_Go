@@ -5,7 +5,8 @@ export const partnerStore = {
     
     namespaced: true,
     state: {
-      partnerlist:[]
+      partnerlist:[],
+      partnerdetail:[]
     },
     mutations: {
         [Constant.ADD_PARTNER]: (state, payload) => {
@@ -28,10 +29,24 @@ export const partnerStore = {
                 console.log("payload data: ")
                 console.log(payload.data)
                 state.partnerlist = payload.data;
+                
+            } else {
+                state.partnerlist = { id: "", name: "",email: ""};
+            }
+        },
+        [Constant.DETAIL_PARTNER]: (state, payload) => {
+            console.log("ENTRA MUTATIONS DETAIL");
+            if (payload) {
+                // console.log("AAAAA");
+             
+                // console.log("payload data: ");
+                // console.log(payload);
+                state.partnerdetail = payload;
+                // console.log(state.partnerdetail);
             } else {
 
-                //CAMBIAR POR EL MODELO PARTNER
-                state.partnerlist = { id: "", name: "",email: ""};
+            
+                state.partnerdetail = { id: "", name: "",lastname:"", email: ""};
             }
         }
     },
@@ -63,6 +78,22 @@ export const partnerStore = {
                     console.log(data_partner)
                     console.log(data_partner.data.data)
                     store.commit(Constant.INITIALIZE_PARTNERITEM, data_partner.data.data);
+                   
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        },
+        detailPartner(store,payload){
+            console.log("DETAIL PARTNER");
+            console.log(payload);
+
+            PartnerService.getOne(payload)
+                .then(function (data_partner) {
+
+                    console.log(data_partner.data.data)
+                  
+                    store.commit(Constant.DETAIL_PARTNER, data_partner.data.data);
                    
                 })
                 .catch(function (error) {
@@ -102,6 +133,10 @@ export const partnerStore = {
         getPartners(state) {
             console.log(state.partnerlist);
             return state.partnerlist;
+        },
+        detailPartners(state) {
+            console.log(state.partnerdetail);
+            return state.partnerdetail;
         }
     }
 

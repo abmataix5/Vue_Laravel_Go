@@ -1,15 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from '../views/Home';
+
 import Workers from '../views/Workers';
 import AddWorker from '../views/AddWorker';
+
 import Login from '../views/Login'
 import guardAuth from "../guards/guardAuth";
+
 import CourtList from '../views/CourtList';
 import CourtAdd from '../views/CourtAdd';
 import UpdateCourt from '../views/UpdateCourt';
+
 import PartnerList from '../views/PartnerList';
 import AddPartner from '../views/AddPartner';
 import UpdatePartner from '../views/UpdatePartner';
+import DetailPartner from '../views/DetailPartner';
 import RentList from '../views/RentList';
 
  
@@ -39,7 +44,7 @@ const routes = [
         meta:{
             title:'Partner'
         },
-        // beforeEnter: guardAuth.workerAuthenticated 
+        beforeEnter: guardAuth.workerAuthenticated 
     },
     { 
         path:'/partner/add', 
@@ -55,6 +60,15 @@ const routes = [
         component:UpdatePartner,
         meta:{
             title:'UpdatePartner'
+        },
+        // beforeEnter: guardAuth.workerAuthenticated 
+    },
+    {
+        path:'/partner/detail/:id', 
+        name: 'detailPartner',
+        component:DetailPartner,
+        meta:{
+            title:'DetailPartner'
         },
         // beforeEnter: guardAuth.workerAuthenticated 
     },

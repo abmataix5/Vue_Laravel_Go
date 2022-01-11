@@ -16,6 +16,7 @@ import AddPartner from '../views/AddPartner';
 import UpdatePartner from '../views/UpdatePartner';
 import DetailPartner from '../views/DetailPartner';
 import RentList from '../views/RentList';
+import Dashboard from '../views/Dashboard'
 
  
 const routes = [
@@ -126,6 +127,14 @@ const routes = [
         path:'/loginLaravel',
         name: 'LoginLaravel',
         component:Login,
+        meta:{
+            title:'LoginLaravel'
+        }
+    },
+    {
+        path:'/dashboard',
+        name: 'Dashboard',
+        component:Dashboard,
         meta:{
             title:'LoginLaravel'
         }

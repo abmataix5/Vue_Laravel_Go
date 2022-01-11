@@ -23,6 +23,9 @@
                     <router-link class="nav-link" to="/court">Menu Pistas</router-link>
                 </li>
                 <li class="nav-item">
+                    <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
+                </li>
+                <li class="nav-item">
                     <router-link class="nav-link" to="/login" v-if="state.userLogued === false">Iniciar sesión</router-link>
                 </li>
                   <li class="nav-item">
@@ -34,9 +37,9 @@
                  <li class="nav-item text-white" v-if="state.userAdmin === true">
                     Cuenta Administradora
                 </li>
-                 <li class="nav-item text-white" v-if="state.userAdmin === false">
+                 <ul class="nav-item text-white" v-if="state.userAdmin === false">
                     Cuenta Trabajador
-                </li>
+                </ul>
             </ul>
         </div>
     </nav>

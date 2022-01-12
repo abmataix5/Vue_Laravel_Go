@@ -28,7 +28,7 @@ Aplicacion web destinada a la adminnistración de un club de padel
         * UUID
         * Serializers
         * Validators
-        * Toke JWT
+        * Token JWT
         * Routes
         * Module
         * SendGrid GO

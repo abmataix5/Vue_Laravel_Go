@@ -3,58 +3,15 @@
 
 
 
-# APP WEB TWOHANDAPP 📋
+# APP MyPadel 📋
 
 
-Primer proyecto del curso 2n Desarrollo de aplicaciones web.
+Segundo proyecto del curso 2n Desarrollo de aplicaciones web.
 
-Aplicacion web destinada a la venta online de productos de seguna mano, estilo Wallapop
-
-
-# INDICE 📌
+Aplicacion web destinada a la adminnistración de un club de padel
 
 
-*  *Imagenes de la APP en funcionamiento* 
-*  *Tecnologias* 
-*  *Modulos* 
-*  *Funcionalidades*
-*  *Autores*
 
-
-## Imagenes de la APP en funcionamiento ⌨️
-
-### Home
-<br><br>
-![Captura de pantalla de 2021-11-11 18-55-58](https://user-images.githubusercontent.com/62066419/141346430-75fa0034-4a5c-4bd1-8afc-c960c6b50e54.png)
-<br>
-### Shop
-<br><br>
-![Captura de pantalla de 2021-11-11 18-55-56](https://user-images.githubusercontent.com/62066419/141346592-c608c13a-c8fc-4dd3-bf8d-2e6a6a400aa2.png)
-<br>
-
-### Perfil
-<br><br>
-![Captura de pantalla de 2021-11-11 18-55-34](https://user-images.githubusercontent.com/62066419/141346614-617b34c8-6fed-4e8c-973e-e8a108f9a13a.png)
-<br>
-
-### Mis pedidos
-<br><br>
-![Captura de pantalla de 2021-11-11 18-55-48](https://user-images.githubusercontent.com/62066419/141346626-177541cd-cace-4a1e-9963-5903ce15d6ed.png)
-
-<br>
-
-### Login/Register
-<br><br>
-![Captura de pantalla de 2021-11-11 19-00-41](https://user-images.githubusercontent.com/62066419/141346734-da686fb5-6378-4689-95c0-ae41a96a8855.png)
-
-<br>
-
-### Settings
-
-![Captura de pantalla de 2021-11-11 18-55-53](https://user-images.githubusercontent.com/62066419/141346741-db4d09e5-c7ac-42fc-88d2-79ad9afbf84a.png)
-
-
-<br>
 
 
 
@@ -63,7 +20,7 @@ Aplicacion web destinada a la venta online de productos de seguna mano, estilo W
 
  * SERVIDOR
 
-     * [Express 4.17.1](https://expressjs.com/es/) basado en NodeJS
+     * [Go](https://es.wikipedia.org/wiki/Go_(lenguaje_de_programaci%C3%B3n))
 
         * Mongoose 
         * Express JWT
@@ -73,7 +30,7 @@ Aplicacion web destinada a la venta online de productos de seguna mano, estilo W
  
 * CLIENTE
 
-    * [Angular 12](https://angular.io/)
+    * [Vue3](https://angular.io/)
 
         * core 
         * shared 
@@ -89,22 +46,18 @@ Aplicacion web destinada a la venta online de productos de seguna mano, estilo W
 
 * BBDD
 
-    * [MongoDB](https://www.mongodb.com/)
-
-
-
-  
-
+    * [MySQL](https://www.mysql.com/)
 
 
 
 ### Modulos de la app 🔩
 
-* *Home* 
-* *Shop* 
-* *Perfil* 
-* *Mis pedidos*
-* *Login/Register*
+
+* *Login* 
+* *Rents* 
+* *Workers List*
+* *Courts List*
+* *Courts List*
 
 
 ### Funcionalidad ⚙️
@@ -115,7 +68,7 @@ Aplicacion web destinada a la venta online de productos de seguna mano, estilo W
         <th>Características</th>
     </tr>
     <tr>
-        <td>Home</td>
+        <td>Login</td>
         <td>
             <ul>
                 <li>Slider -->  Mostramos imagenes desde DB.</li>

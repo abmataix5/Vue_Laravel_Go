@@ -353,12 +353,12 @@ func httpPost(jsonData []byte) bool {
 	fmt.Println("response Status:", response.Status)
 	fmt.Println("http.Status", http.StatusOK)
 
-	if response.Status == "200 OK" {
+	if response.Status == "200" {
 
-		fmt.Println("TOT OK")
+		fmt.Println("succes")
 		return true
 	} else {
-		fmt.Println("FAIL")
+		fmt.Println("error")
 
 		return false
 	}

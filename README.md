@@ -92,7 +92,7 @@ Aplicacion web destinada a la adminnistración de un club de padel
             </ul>
         </td>
 
-      </tr>
+    
     
     
    

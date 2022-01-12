@@ -22,26 +22,30 @@ Aplicacion web destinada a la adminnistración de un club de padel
 
      * [Go](https://es.wikipedia.org/wiki/Go_(lenguaje_de_programaci%C3%B3n))
 
-        * Mongoose 
-        * Express JWT
-        * Passport
-        * Slug
-        * middleware_auth
+        * Midedlewares Admin
+        * Midedlewares Auth
+        * Middleware JWT
+        * UUID
+        * Serializers
+        * Validators
+        * Toke JWT
+        * Routes
+        * Module
+        * SendGrid GO
+ 
  
 * CLIENTE
 
-    * [Vue3](https://angular.io/)
+    * [Vue3](https://vue.io/)
 
-        * core 
-        * shared 
-        * interceptor 
-        * observable/suscribe/subjects
-        * ng Bootsrap
-        * ngx-toastr
-        * ngx-reactive forms
-        * ngx-pagination
-        * ng-rating bar
-        * ngx-infinite-scroll
+        * Store modularizado 
+        * Componentes 
+        * Api Services Go/Laravel 
+        * AuthGUard
+        * Headers Authentication -> Token , Admin
+        * Reactive
+        * Computed
+    
 
 
 * BBDD

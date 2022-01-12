@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -58,7 +59,8 @@ func (server *Server) CreateUser(c *gin.Context) {
 	}
 
 	userCreated, err := user.SaveUser(server.DB)
-	fmt.Print(userCreated.ID)
+	serialized := userCreated.SerializeWorkerInfo()
+
 	if err != nil {
 		formattedError := formaterror.FormatError(err.Error())
 		errList = formattedError
@@ -87,7 +89,7 @@ func (server *Server) CreateUser(c *gin.Context) {
 
 		c.JSON(http.StatusCreated, gin.H{
 			"status":   http.StatusCreated,
-			"response": userCreated,
+			"response": serialized,
 		})
 	}
 
@@ -107,6 +109,7 @@ func (server *Server) GetUsers(c *gin.Context) {
 		})
 		return
 	}
+
 	fmt.Println(users)
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "response": users})
 
@@ -129,6 +132,7 @@ func (server *Server) GetUser(c *gin.Context) {
 	user := models.Worker{}
 
 	userGotten, err := user.FindUserByID(server.DB, uint32(uid))
+	serialized := userGotten.SerializeWorkerInfo()
 	if err != nil {
 		errList["No_user"] = "No User Found"
 		c.JSON(http.StatusNotFound, gin.H{
@@ -139,7 +143,7 @@ func (server *Server) GetUser(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":   http.StatusOK,
-		"response": userGotten,
+		"response": serialized,
 	})
 }
 
@@ -309,7 +313,6 @@ func (server *Server) DeleteUser(c *gin.Context) {
 
 }
 
-/*
 func CheckAdmin(c *gin.Context) {
 
 	workerModel := models.Worker{}
@@ -319,7 +322,7 @@ func CheckAdmin(c *gin.Context) {
 	isAdmin := workerModel.Admin
 
 	if isAdmin == "true" {
-		if data := postForm(jsonData); data != true {
+		if data := httpPost(jsonData); data != true {
 			c.JSON(http.StatusNotFound, gin.H{"message": "No es un administrador"})
 			return
 		}
@@ -330,4 +333,34 @@ func CheckAdmin(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"message": "No es un administrador"})
 
 	}
-} */
+}
+
+func httpPost(jsonData []byte) bool {
+
+	fmt.Println("http://0.0.0.0:8001/api/users/")
+
+	url := "http://0.0.0.0:8001/api/users/"
+
+	request, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+	request.Header.Set("Content-Type", "application/json; charset=UTF-8")
+	client := &http.Client{}
+	response, err := client.Do(request)
+	if err != nil {
+		panic(err)
+	}
+	defer response.Body.Close()
+
+	fmt.Println("response Status:", response.Status)
+	fmt.Println("http.Status", http.StatusOK)
+
+	if response.Status == "200 OK" {
+
+		fmt.Println("TOT OK")
+		return true
+	} else {
+		fmt.Println("FAIL")
+
+		return false
+	}
+
+}

@@ -21,7 +21,7 @@
 
 import Constant from "../Constant";
 import { useStore } from "vuex";
-/* import { useRouter } from "vue-router"; */
+import { useRouter } from "vue-router"; 
 
 export default {
   props: {
@@ -30,7 +30,7 @@ export default {
   setup() {
 
    const store = useStore();
-/*    const router = useRouter(); */
+   const router = useRouter(); 
 
    const deleteW = (id) => {
        console.log("delete");
@@ -38,7 +38,13 @@ export default {
        console.log(id);
        store.dispatch("worker/"+Constant.DELETE_WORKER, { id });
     };
-    return { deleteW }; 
+
+     const editTodo = (id) => {
+       console.log("update");
+            
+      router.push({ name: "updateWorker", params: { id } });
+    };
+    return { deleteW,editTodo }; 
   },
 };
 </script>

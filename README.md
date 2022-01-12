@@ -96,7 +96,7 @@ Aplicacion web destinada a la adminnistración de un club de padel
         <td>Courts List</td>
         <td>
             <ul>
-                <li>Info/li>
+                <li>Info</li>
             </ul>
         </td>
     </tr>
@@ -104,7 +104,7 @@ Aplicacion web destinada a la adminnistración de un club de padel
         <td>Partners List</td>
         <td>
             <ul>
-                <li>Info/li>
+                <li>Info</li>
             </ul>
         </td>
     </tr>

@@ -92,6 +92,20 @@ Aplicacion web destinada a la adminnistración de un club de padel
             </ul>
         </td>
     </tr> 
+    
+     <tr>
+        <td>Courts List</td>
+        <td>
+     
+        </td>
+    </tr> 
+    
+     <tr>
+        <td>Partners List</td>
+        <td>
+
+        </td>
+    </tr> 
    
         
   

@@ -93,13 +93,21 @@ Aplicacion web destinada a la adminnistración de un club de padel
         </td>
     </tr>
      <tr>
-        <td>Worker List</td>
+        <td>Courts List</td>
         <td>
             <ul>
-                <li>WorkerItem>> Componente que nos muestran el listado de trabajadores con su información correspondiente, tembien permite al administrador editar o borrar trabajadores</li>
-                <li>Añadir trabajador >> Permite al administrador añadir trabajadores, concederles permisos de admin, cuenta con validacion mediante Vuelidate, al dar de alta a un trabajador, se le notifica automatiamente con un correo mendiane SendGrid</li>
+                <li>Info/li>
             </ul>
         </td>
+    </tr>
+    <tr>
+        <td>Partners List</td>
+        <td>
+            <ul>
+                <li>Info/li>
+            </ul>
+        </td>
+    </tr>
         
     
     

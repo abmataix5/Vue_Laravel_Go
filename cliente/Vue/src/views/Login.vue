@@ -93,10 +93,6 @@ export default {
             });
           }
           
-          
-          
-        alert("Usuario logueado");
-        location.reload();
          router.push('/home');
       } else {
       

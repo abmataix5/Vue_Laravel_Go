@@ -38,7 +38,7 @@
                     Cuenta Administradora
                 </li>
                  <ul class="nav-item text-white" v-if="state.userAdmin === false">
-                    Cuenta Trabajador
+                    Cuenta Trabajador {{state.userAdmin}}
                 </ul>
             </ul>
         </div>
@@ -63,13 +63,14 @@ export default {
 
         userLogued: computed(() => store.getters["worker/userLogued"]),
         userAdmin: computed(() => store.getters["worker/isAdmin"]),
-
+        username : localStorage.getItem('username')
       });
 
       
         const checkOut = () => {
             localStorage.removeItem('token');
             localStorage.removeItem('admin');
+             localStorage.removeItem('username');
             location.reload();
         }
 

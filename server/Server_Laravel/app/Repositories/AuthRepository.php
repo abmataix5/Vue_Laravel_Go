@@ -10,7 +10,7 @@ class AuthRepository{
 
     public function isAdmin($email)
     {
-         $user= Worker::where('email',$email)->get(); // buscamos usuario por email.
+         $user= User::where('email',$email)->get(); // buscamos usuario por email.
        
          if($user){
              return $user;

@@ -91,21 +91,7 @@ Aplicacion web destinada a la adminnistración de un club de padel
                 <li>Añadir trabajador >> Permite al administrador añadir trabajadores, concederles permisos de admin, cuenta con validacion mediante Vuelidate, al dar de alta a un trabajador, se le notifica automatiamente con un correo mendiane SendGrid</li>
             </ul>
         </td>
-    </tr> 
-    
-     <tr>
-        <td>Courts List</td>
-        <td>
-     
-        </td>
-    </tr> 
-    
-     <tr>
-        <td>Partners List</td>
-        <td>
 
-        </td>
-    </tr> 
    
         
   

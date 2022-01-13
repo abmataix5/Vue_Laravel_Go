@@ -9,13 +9,10 @@ import (
 	"net/http"
 	"os"
 
-	"golang.org/x/crypto/bcrypt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/victorsteven/forum/api/models"
-	"github.com/victorsteven/forum/api/security"
 	"github.com/victorsteven/forum/api/utils/formaterror"
 )
 
@@ -176,57 +173,14 @@ func (server *Server) UpdateUser(c *gin.Context) {
 
 	newUser := models.Worker{}
 
-	//When current password has content.
-	if requestBody["current_password"] == "" && requestBody["new_password"] != "" {
-		errList["Empty_current"] = "Please Provide current password"
-		c.JSON(http.StatusUnprocessableEntity, gin.H{
-			"status": http.StatusUnprocessableEntity,
-			"error":  errList,
-		})
-		return
-	}
+	//Fields update
 
-	if requestBody["current_password"] != "" && requestBody["new_password"] == "" {
-		errList["Empty_new"] = "Please Provide new password"
-		c.JSON(http.StatusUnprocessableEntity, gin.H{
-			"status": http.StatusUnprocessableEntity,
-			"error":  errList,
-		})
-		return
-	}
-
-	if requestBody["current_password"] != "" && requestBody["new_password"] != "" {
-		//Also check if the new password
-		if len(requestBody["new_password"]) < 6 {
-			errList["Invalid_password"] = "Password should be atleast 6 characters"
-			c.JSON(http.StatusUnprocessableEntity, gin.H{
-				"status": http.StatusUnprocessableEntity,
-				"error":  errList,
-			})
-			return
-		}
-		//if they do, check that the former password is correct
-		err = security.VerifyPassword(formerUser.Password, requestBody["current_password"])
-		if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
-			errList["Password_mismatch"] = "The password not correct"
-			c.JSON(http.StatusUnprocessableEntity, gin.H{
-				"status": http.StatusUnprocessableEntity,
-				"error":  errList,
-			})
-			return
-		}
-		//update both the password and the email
-		newUser.Name = formerUser.Name //remember, you cannot update the username
-		newUser.Email = requestBody["email"]
-		newUser.Password = requestBody["new_password"]
-	}
-
-	//The password fields not entered, so update only the email
 	newUser.Name = formerUser.Name
 	newUser.Email = requestBody["email"]
 	newUser.Name = requestBody["username"]
 	newUser.Phone = requestBody["phone"]
 	newUser.Address = requestBody["address"]
+	newUser.Worker_type = requestBody["worker_type"]
 
 	newUser.Prepare()
 	errorMessages := newUser.Validate("update")
@@ -240,6 +194,8 @@ func (server *Server) UpdateUser(c *gin.Context) {
 	}
 
 	updatedUser, err := newUser.UpdateAUser(server.DB, string(userID))
+	serialized := updatedUser.SerializeWorkerInfo()
+
 	if err != nil {
 		errList := formaterror.FormatError(err.Error())
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -250,7 +206,7 @@ func (server *Server) UpdateUser(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":   http.StatusOK,
-		"response": updatedUser,
+		"response": serialized,
 	})
 }
 

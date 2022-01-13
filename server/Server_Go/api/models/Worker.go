@@ -7,7 +7,6 @@ import (
 	"log"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/jinzhu/gorm"
 	"github.com/sendgrid/sendgrid-go"
@@ -81,11 +80,11 @@ func (worker *Worker) UpdateAUser(db *gorm.DB, uid string) (*Worker, error) {
 
 	db = db.Debug().Model(&Worker{}).Where("id = ?", uid).Take(&Worker{}).UpdateColumns(
 		map[string]interface{}{
-			"email":     worker.Email,
-			"phone":     worker.Phone,
-			"address":   worker.Address,
-			"username":  worker.Name,
-			"update_at": time.Now(),
+			"email":       worker.Email,
+			"phone":       worker.Phone,
+			"address":     worker.Address,
+			"username":    worker.Name,
+			"worker_type": worker.Worker_type,
 		},
 	)
 
@@ -101,7 +100,7 @@ func (worker *Worker) UpdateAUser(db *gorm.DB, uid string) (*Worker, error) {
 }
 
 func (u *Worker) DeleteAUser(db *gorm.DB, uid string) (int64, error) {
-	/* fmt.Println(uid) */
+
 	db = db.Debug().Model(&Worker{}).Where("id = ?", uid).Take(&Worker{}).Delete(&Worker{})
 	if db.Error != nil {
 		return 0, db.Error

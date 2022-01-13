@@ -63,7 +63,8 @@ const routes = [
         component: AddPartner,
         meta:{
             title:'AddPartner'
-        } 
+        } , 
+        beforeEnter: guardAuth.workerAuthenticated
     },
     {
         path:'/partner/update/:id', 
@@ -72,7 +73,7 @@ const routes = [
         meta:{
             title:'UpdatePartner'
         },
-        // beforeEnter: guardAuth.workerAuthenticated 
+        beforeEnter: guardAuth.workerAuthenticated
     },
     {
         path:'/partner/detail/:id', 
@@ -81,7 +82,8 @@ const routes = [
         meta:{
             title:'DetailPartner'
         },
-        // beforeEnter: guardAuth.workerAuthenticated 
+        beforeEnter: guardAuth.workerAuthenticated
+        
     },
     {
         path:'/court',
@@ -98,7 +100,8 @@ const routes = [
         component: CourtAdd,
         meta:{
             title:'CourtsAdd'
-        } 
+        },
+        beforeEnter: guardAuth.workerAuthenticated
     },
     { 
         path:'/court/update/:id', 
@@ -106,7 +109,8 @@ const routes = [
         component: UpdateCourt,
         meta:{
             title:'UpdateCourts'
-        } 
+        } ,
+        beforeEnter: guardAuth.workerAuthenticated
     },
     {
         path:'/rent',
@@ -114,7 +118,8 @@ const routes = [
         component:RentList,
         meta:{
             title:'Rentings'
-        }
+        },
+        beforeEnter: guardAuth.workerAuthenticated
     },
     {
         path:'/addworker',

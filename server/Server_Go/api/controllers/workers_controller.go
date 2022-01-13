@@ -8,14 +8,12 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
-	"github.com/victorsteven/forum/api/auth"
 	"github.com/victorsteven/forum/api/models"
 	"github.com/victorsteven/forum/api/security"
 	"github.com/victorsteven/forum/api/utils/formaterror"
@@ -120,18 +118,9 @@ func (server *Server) GetUser(c *gin.Context) {
 	errList = map[string]string{}
 	userID := c.Param("id")
 
-	uid, err := strconv.ParseUint(userID, 10, 32)
-	if err != nil {
-		errList["Invalid_request"] = "Invalid Request"
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  errList,
-		})
-		return
-	}
 	user := models.Worker{}
 
-	userGotten, err := user.FindUserByID(server.DB, uint32(uid))
+	userGotten, err := user.FindUserByID(server.DB, userID)
 	serialized := userGotten.SerializeWorkerInfo()
 	if err != nil {
 		errList["No_user"] = "No User Found"
@@ -152,35 +141,6 @@ func (server *Server) UpdateUser(c *gin.Context) {
 	errList = map[string]string{}
 
 	userID := c.Param("id")
-
-	uid, err := strconv.ParseUint(userID, 10, 32)
-	if err != nil {
-		errList["Invalid_request"] = "Invalid Request"
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  errList,
-		})
-		return
-	}
-
-	tokenID, err := auth.ExtractTokenID(c.Request)
-	if err != nil {
-		errList["Unauthorized"] = "Unauthorized"
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"status": http.StatusUnauthorized,
-			"error":  errList,
-		})
-		return
-	}
-
-	if tokenID != 0 && tokenID != uint32(uid) {
-		errList["Unauthorized"] = "Unauthorized"
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"status": http.StatusUnauthorized,
-			"error":  errList,
-		})
-		return
-	}
 
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
@@ -204,7 +164,7 @@ func (server *Server) UpdateUser(c *gin.Context) {
 	}
 
 	formerUser := models.Worker{}
-	err = server.DB.Debug().Model(models.Worker{}).Where("id = ?", uid).Take(&formerUser).Error
+	err = server.DB.Debug().Model(models.Worker{}).Where("id = ?", userID).Take(&formerUser).Error
 	if err != nil {
 		errList["User_invalid"] = "The user is does not exist"
 		c.JSON(http.StatusUnprocessableEntity, gin.H{
@@ -264,6 +224,9 @@ func (server *Server) UpdateUser(c *gin.Context) {
 	//The password fields not entered, so update only the email
 	newUser.Name = formerUser.Name
 	newUser.Email = requestBody["email"]
+	newUser.Name = requestBody["username"]
+	newUser.Phone = requestBody["phone"]
+	newUser.Address = requestBody["address"]
 
 	newUser.Prepare()
 	errorMessages := newUser.Validate("update")
@@ -276,7 +239,7 @@ func (server *Server) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	updatedUser, err := newUser.UpdateAUser(server.DB, uint32(uid))
+	updatedUser, err := newUser.UpdateAUser(server.DB, string(userID))
 	if err != nil {
 		errList := formaterror.FormatError(err.Error())
 		c.JSON(http.StatusInternalServerError, gin.H{

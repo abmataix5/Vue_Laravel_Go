@@ -81,10 +81,8 @@ func ExtractTokenID(r *http.Request) (uint32, error) {
 func AdminValid(r *http.Request) string {
 	admin := r.Header.Get("Admin")
 
-	fmt.Println(admin + "   Admin?")
-
 	if admin != "Admin false" {
-		fmt.Print("Entra admin false")
+
 		return "true"
 	}
 

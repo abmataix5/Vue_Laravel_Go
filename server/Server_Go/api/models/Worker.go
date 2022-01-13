@@ -65,7 +65,7 @@ func (u *Worker) FindAllUsers(db *gorm.DB) (*[]Worker, error) {
 	return &worker, err
 }
 
-func (worker *Worker) FindUserByID(db *gorm.DB, uid uint32) (*Worker, error) {
+func (worker *Worker) FindUserByID(db *gorm.DB, uid string) (*Worker, error) {
 	var err error
 	err = db.Debug().Model(Worker{}).Where("id = ?", uid).Take(&worker).Error
 	if err != nil {
@@ -77,34 +77,22 @@ func (worker *Worker) FindUserByID(db *gorm.DB, uid uint32) (*Worker, error) {
 	return worker, err
 }
 
-func (worker *Worker) UpdateAUser(db *gorm.DB, uid uint32) (*Worker, error) {
-	if worker.Password != "" {
-		// To hash the password
-		err := worker.BeforeSave()
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		db = db.Debug().Model(&Worker{}).Where("id = ?", uid).Take(&Worker{}).UpdateColumns(
-			map[string]interface{}{
-				"password":  worker.Password,
-				"email":     worker.Email,
-				"update_at": time.Now(),
-			},
-		)
-	}
+func (worker *Worker) UpdateAUser(db *gorm.DB, uid string) (*Worker, error) {
 
 	db = db.Debug().Model(&Worker{}).Where("id = ?", uid).Take(&Worker{}).UpdateColumns(
 		map[string]interface{}{
 			"email":     worker.Email,
+			"phone":     worker.Phone,
+			"address":   worker.Address,
+			"username":  worker.Name,
 			"update_at": time.Now(),
 		},
 	)
+
 	if db.Error != nil {
 		return &Worker{}, db.Error
 	}
 
-	// This is the display the updated user
 	err := db.Debug().Model(&Worker{}).Where("id = ?", uid).Take(&worker).Error
 	if err != nil {
 		return &Worker{}, err

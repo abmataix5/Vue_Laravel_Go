@@ -27,7 +27,7 @@ export const workerStore = {
          
             setStore('token', payload.token); /* Guardamos token en localstorage */
             setStore('admin', payload.admin); /* Guardamos si es admin o no */
-
+            setStore('username', payload.username); /* Guardamos si es admin o no */
             state.user = payload;
             console.log(state.user.admin);  /* Guardamos en el state el usuario logueado */
         },
@@ -91,6 +91,9 @@ export const workerStore = {
                 .then(function (worker_logued) {
                     console.log(worker_logued.data.response)
                     store.commit(Constant.LOGIN_WORKER, worker_logued.data.response);
+                    alert("Usuario logueado");
+                    location.reload();
+                    
                    
                 })
                 .catch(function (error) {

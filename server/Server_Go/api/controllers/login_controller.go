@@ -31,7 +31,7 @@ func (server *Server) Login(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, gin.H{
 			"status": http.StatusUnprocessableEntity,
-			"error":  "Cannot unmarshal body",
+			"error":  "Error body request",
 		})
 		return
 	}
@@ -55,10 +55,10 @@ func (server *Server) Login(c *gin.Context) {
 		})
 		return
 	}
-	fmt.Print(userData)
+
 	c.JSON(http.StatusOK, gin.H{
 		"status":   http.StatusOK,
-		"response": userData,
+		"response": userData, /* Devuelve los datos con el serialized que viene de SignIn */
 	})
 }
 

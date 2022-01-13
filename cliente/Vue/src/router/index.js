@@ -3,6 +3,7 @@ import Home from '../views/Home';
 
 import Workers from '../views/Workers';
 import AddWorker from '../views/AddWorker';
+import UpdateWorker from '../views/UpdateWorker'
 
 import Login from '../views/Login'
 import guardAuth from "../guards/guardAuth";
@@ -37,6 +38,15 @@ const routes = [
             title:'Workers'
         } ,
         beforeEnter: guardAuth.workerAuthenticated 
+    },
+    {
+        path:'/workers/update/:id', 
+        name: 'updateWorker',
+        component:UpdateWorker,
+        meta:{
+            title:'updateWorker'
+        },
+         beforeEnter: guardAuth.isAdmin 
     },
     {
         path:'/partner',

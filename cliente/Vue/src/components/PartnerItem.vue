@@ -34,21 +34,17 @@ export default {
    const router = useRouter();
 
    const detailPartner = (id) => {
-      console.log("detail");
-       console.log(id);
+ 
       router.push({ name: 'detailPartner', params: { id } })
     };
 
    const deletePartner = (id) => {
-       console.log("delete");
-            
-       console.log(id);
+
        store.dispatch(Constant.DELETE_PARTNER, { id });
     };
     const editPartner = (id) => {
-            console.log("EDIT PARTNER");
-            // console.log(id)
-            // store.dispatch(Constant.UPDATE_COURT, { courtitem: { ...props.courtitem } });
+           
+          
             router.push({ name: 'updatePartner', params: { id } })
       }
     return { deletePartner, editPartner, detailPartner }; 

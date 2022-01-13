@@ -28,19 +28,6 @@ export default () => {
         location.reload()
       
       }
-      if (error.response.status === 202) {
-        // localStorage.removeItem('token')
-        // localStorage.removeItem('user')
-        // location.reload()
-        console.log("usuario eliminado")
-      }
-
-      if (error.response.status === 500) {
-        // localStorage.removeItem('token')
-        // localStorage.removeItem('user')
-        // location.reload()
-        console.log("usuario Creado")
-      }
       return Promise.reject(error) 
     }
   )

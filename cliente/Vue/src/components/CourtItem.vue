@@ -1,7 +1,5 @@
 <template>
 <div class="row">
-        <!-- <p>hola</p> -->
-         <!-- <span :class="{ pointer:true, 'user-done':useritem.done }" :title="'Explanation : ' + useritem.desc">  -->
         <span> 
             ID: {{courtitem.id}}
             NAME: {{courtitem.name}}
@@ -28,12 +26,11 @@ export default {
         const router = useRouter();
 
         const deleteCourt = (id) => {
-            console.log(id);
+           
             store.dispatch(Constant.DELETE_COURT, { id });
         }
         const editCourt = (id) => {
-            console.log("EDIT COURT");
-            // store.dispatch(Constant.UPDATE_COURT, { courtitem: { ...props.courtitem } });
+        
             router.push({ name: 'updateCourt', params: { id } })
         }
          return { deleteCourt, editCourt}

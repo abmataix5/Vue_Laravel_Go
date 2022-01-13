@@ -24,10 +24,7 @@ export const partnerStore = {
         [Constant.INITIALIZE_PARTNERITEM]: (state, payload) => {
             console.log("ENTRA MUTATIONS INITAILIZE");
             if (payload) {
-                console.log("AAAAA");
-             
-                console.log("payload data: ")
-                console.log(payload.data)
+                
                 state.partnerlist = payload.data;
                 
             } else {
@@ -37,12 +34,9 @@ export const partnerStore = {
         [Constant.DETAIL_PARTNER]: (state, payload) => {
             console.log("ENTRA MUTATIONS DETAIL");
             if (payload) {
-                // console.log("AAAAA");
-             
-                // console.log("payload data: ");
-                // console.log(payload);
+                
                 state.partnerdetail = payload;
-                // console.log(state.partnerdetail);
+                
             } else {
 
             
@@ -95,9 +89,7 @@ export const partnerStore = {
                 })
         },
         detailPartner(store,payload){
-            console.log("DETAIL PARTNER");
-            console.log(payload);
-
+         
             PartnerService.getOne(payload)
                 .then(function (data_partner) {
 

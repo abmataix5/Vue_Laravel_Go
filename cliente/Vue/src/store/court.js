@@ -23,11 +23,7 @@ export const courtStore = {
         [Constant.INITIALIZE_COURTITEM]: (state, payload) => {
           
             if (payload) {
-                console.log("AAAAA");
-                console.log(state);
-                console.log("payload data: ")
-                console.log(payload);
-                console.log(payload.data);
+                
                 state.courtlist = payload.data.data;
             } else {
                 state.courtlist = { name: "",schedule: "",date: "", A_drive: "",A_reves: "", B_drive: "",B_reves: "" };
@@ -37,8 +33,7 @@ export const courtStore = {
     actions: {
 
         addCourt(store,payload){
-            console.log("ACTION ADDCOURT");
-            console.log(payload.courtitem);
+            
             CourtService.add(payload.courtitem)
             .then(function (data_court) {
                 console.log("ACTION ADDCOURT .THEN");
@@ -54,7 +49,7 @@ export const courtStore = {
 
             CourtService.get("/courts")
                 .then(function (data_court) {
-                    console.log("INITIALIZE!");
+                   
                     store.commit(Constant.INITIALIZE_COURTITEM, data_court.data);
                    
                 })
@@ -65,8 +60,8 @@ export const courtStore = {
         deleteCourt(store, payload){
 
             CourtService.delete(payload.id)
-                    .then(function (res) {
-                        console.log(res);
+                    .then(function () {
+                       
                         store.commit(Constant.DELETE_COURT, payload);
                     }
                     )
@@ -75,8 +70,7 @@ export const courtStore = {
                     })
         },
         updateCourt(store, payload){
-            console.log("ACTION UPDATE COURT");
-            console.log(payload);
+          
             CourtService.update(payload.courtitem.id, payload.courtitem)
                     .then(function (res) {
                         console.log(res);

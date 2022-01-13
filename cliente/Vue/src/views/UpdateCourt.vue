@@ -8,8 +8,8 @@
     <div class="row">
       <div class="col">
          <div class="form-group">
-          <label htmlFor="id"> ID:</label>
-          <input type="text" class="form-control" v-model="state.courtitemlocal.id" />
+          <label htmlFor="id" > ID:</label>
+          <input type="text" class="form-control" v-model="state.courtitemlocal.id" readonly />
         </div>
 
         <div class="form-group">

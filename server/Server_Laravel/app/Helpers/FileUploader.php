@@ -16,8 +16,7 @@ class FileUploader
 
 	public static function store($file, $title, $loc)
   	{
-        //dd($file);
-        $request = new Request();
+       
         if ($file){
             $name  = self::name($title);
             $name  = $name . '.' . $file->getClientOriginalExtension();

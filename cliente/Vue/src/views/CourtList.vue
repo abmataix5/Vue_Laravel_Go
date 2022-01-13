@@ -1,5 +1,8 @@
 <template>
-    <div style="mt-2">
+    <div class="mt-2 ml-3">
+        <div class="row ml-2">
+            <h3>PISTAS DISPONIBLES</h3>
+        </div>
        <div class="row">
             <div class="col p-3">
                 <router-link class="btn btn-primary" to="/Court/add">Añadir Pista</router-link>

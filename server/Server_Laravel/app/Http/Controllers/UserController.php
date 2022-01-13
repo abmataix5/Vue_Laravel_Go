@@ -115,6 +115,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $out->writeln("---------------USER_UPDATE-------------------");
+        $out->writeln($request);
+        $out->writeln($id);
+        
         $data = $this->userRepository->update($id,$request->all());
 
         if(is_null($data)){

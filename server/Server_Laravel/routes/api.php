@@ -28,26 +28,12 @@ Route::resource('users', UserController::class);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-// Route::get('mail/send-grid', [PostController::class, 'sendMail']);
-
-//NEW ADD FOR LOGIN
-// Route::group(['prefix' => 'auth', 'middleware' => 'jwt.verify'], function () {
-//     Route::post('logout', 'UserController@logout')->name('users.logout');
-//     Route::put('update', 'UserController@update')->name('users.update');
-//     Route::post('destroy', 'UserController@destroy')->name('users.destroy');
-//     Route::post('getuser', 'UserController@getUser')->name('users.getuser');
-// });
-
-// Route::post('register', 'UserController@store')->name('users.store');
-// Route::post('login', 'UserController@login')->name('users.login');
-
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 
 ], function ($router) {
-    // Route::post('login', [AuthController::class, 'login']);
-    // Route::post('/register', [AuthController::class, 'register']);
+   
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);   

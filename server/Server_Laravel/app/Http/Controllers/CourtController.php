@@ -22,7 +22,7 @@ class CourtController extends Controller
     public function __construct(CourtRepository $courtRepository)
     {
         $this->courtRepository = $courtRepository;
-        // $this->not_found = Response::HTTP_NOT_FOUND;
+  
     }
 
     /**
@@ -33,12 +33,6 @@ class CourtController extends Controller
     public function index(Request $request)
     {
         $data= $this->courtRepository->all();
-       
-        ///DEBUG
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("--------------- LIST COURTS -------------------");
-        $out->writeln($data);
-        /////DEBUG
        
         return self::apiResponseSuccess(new CourtCollection($data), 'Listado Pistas');
 
@@ -62,10 +56,6 @@ class CourtController extends Controller
      */
     public function store(StoreCourtRequest $request)
     {
-        ///DEBUG
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------STORE COURT CONTROLLER-------------------");
-    
         $data = $this->courtRepository->create($request->all());
         return self::apiResponseSuccess($data, 'Pista creada correctamente');
     }

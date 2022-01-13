@@ -36,10 +36,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        ///DEBUG
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------USER LIST-------------------");
-        /////DEBUG
         $data=$this->userRepository->all();
     
         return self::apiResponseSuccess(new UserCollection($data), 'Listado Socios');
@@ -65,10 +61,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         try{
-         ///DEBUG
-            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-            $out->writeln("---------------USER_STORE-------------------");
-            
+         
             // $data= $this->mailRepository->sendMail($request->all());
             $data = $this->userRepository->create($request->all());
 
@@ -87,12 +80,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        ///DEBUG
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------USER-------------------");
-        /////DEBUG
         return UserResource::make(User::where('id', $id)->firstOrFail());
-        //
+    
     }
 
     /**

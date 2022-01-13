@@ -55,11 +55,20 @@ export const partnerStore = {
         addPartner(store,payload){
             console.log("ACTION ADDPARTNER");
             //EL valor password está en default. Ya que los socios son registrados por personal autorizado.
-            payload.partneritem.password= "default"; //valor por defecto para los socios.
-            payload.partneritem.admin="false"; //valor por defecto para los socios.
             console.log(payload.partneritem);
             
-            PartnerService.add(payload.partneritem)
+            let formData = new FormData();
+            formData.append("name", payload.partneritem.name);
+            formData.append("lastname", payload.partneritem.lastname);
+            formData.append("email", payload.partneritem.email);
+            formData.append("position", payload.partneritem.position);
+            formData.append("image", payload.partneritem.image);
+            formData.append("phone", payload.partneritem.phone);
+            formData.append("password", "default");
+            formData.append("admin", "false");
+
+
+            PartnerService.add(formData)
             .then(function (data_partner) {
                 console.log("ACTION ADDPARTNER .THEN");
                 store.commit(Constant.ADD_PARTNER, data_partner);
@@ -118,7 +127,17 @@ export const partnerStore = {
             console.log("ACTION UPDATE PARTNER");
             console.log(payload);
          
-            PartnerService.update(payload.partneritem.id, payload.partneritem)
+            let formData = new FormData();
+            formData.append("name", payload.partneritem.name);
+            formData.append("lastname", payload.partneritem.lastname);
+            formData.append("email", payload.partneritem.email);
+            formData.append("position", payload.partneritem.position);
+            formData.append("image", payload.partneritem.image);
+            formData.append("phone", payload.partneritem.phone);
+            formData.append("password", "default");
+            formData.append("admin", "false");
+
+            PartnerService.update(payload.partneritem.id, formData)
                     .then(function (res) {
                         console.log(res);
                         console.log(res.data);

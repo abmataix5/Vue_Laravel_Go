@@ -10,19 +10,23 @@ use App\Http\Requests\StoreUserRequest;
 
 use App\Traits\ApiResponseTrait;
 use App\Repositories\UserRepository;
+// use App\Repositories\MailRepository;
 
 use App\Models\User;
+
 
 class UserController extends Controller
 {
 
     use ApiResponseTrait;
     public $userRepository;
-
+    // public $mailRepository;
     public function __construct(UserRepository $userRepository)
+    // public function __construct(UserRepository $userRepository,MailRepository $mailRepository)
     {
         $this->userRepository = $userRepository;
-        // $this->not_found = Response::HTTP_NOT_FOUND;
+        // $this->mailRepository = $mailRepository;
+     
     }
 
     /**
@@ -64,10 +68,10 @@ class UserController extends Controller
          ///DEBUG
             $out = new \Symfony\Component\Console\Output\ConsoleOutput();
             $out->writeln("---------------USER_STORE-------------------");
-            $out->writeln($request);
-         /////DEBUG
-
+            
+            // $data= $this->mailRepository->sendMail($request->all());
             $data = $this->userRepository->create($request->all());
+
             return self::apiResponseSuccess($data, 'Socio registrado correctamente');
 
         }catch(\Throwable|\Exception $e){

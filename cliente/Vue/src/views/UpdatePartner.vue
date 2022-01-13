@@ -35,8 +35,12 @@
             <option>Revés</option>
             <option>Ambas</option>
           </select>
-        
         </div>
+         <div class="form-group">
+                <label htmlFor="image">Image:</label><br>
+                <img class="h-75" v-bind:src="state.partneritemlocal.image" /> 
+                <input type="file" class="form-control" id="image" ref="image"/>
+          </div>
         <div class="form-group">
             <button type="button" class="btn btn-primary m-1" @click="updatePartner">Update</button>
             <button type="button" class="btn btn-primary m-1" @click="cancel">Cancel</button>
@@ -51,6 +55,7 @@ import Constant from '../Constant';
 import { reactive } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router';
+import { ref } from 'vue';
 
 export default {
     setup() {
@@ -58,16 +63,31 @@ export default {
         const store = useStore();
         const router = useRouter();
         const currentRoute = useRoute();
+        const image = ref(null);
+
         console.log(store.state.partner.partnerlist[0].id);
         console.log(currentRoute.params.id);
        
         const partneritem = store.state.partner.partnerlist.find((item)=> item.id == currentRoute.params.id)
         console.log(partneritem);
+
         const state = reactive({ 
             partneritemlocal : { ...partneritem } 
         });
      
         const updatePartner = () => {
+          
+          console.log("entra update partner");
+
+          if(image.value.files[0]!= undefined){
+            console.log("entra image.value");
+            state.partneritemlocal.image = image.value.files[0];
+            // console.log("valor final");
+            console.log(state.partneritemlocal.image);
+          }else{
+            state.partneritemlocal.image = null;
+          }
+
           console.log("UPDATE PARTNER VIEW");
             router.push({ name:"partnerList" });
             store.dispatch(Constant.UPDATE_PARTNER, { partneritem: state.partneritemlocal });
@@ -77,7 +97,7 @@ export default {
             router.push({ name:"partnerList"});
         }
 
-        return { state, updatePartner, cancel };
+        return { state, updatePartner, cancel, image };
     }
 }
 </script>

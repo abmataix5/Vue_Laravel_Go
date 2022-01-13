@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourtController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,6 +27,8 @@ Route::resource('users', UserController::class);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+
+// Route::get('mail/send-grid', [PostController::class, 'sendMail']);
 
 //NEW ADD FOR LOGIN
 // Route::group(['prefix' => 'auth', 'middleware' => 'jwt.verify'], function () {

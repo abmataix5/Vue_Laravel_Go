@@ -8,7 +8,7 @@
                 <div>TURNO: {{rentitem.schedule}}</div>
             </figcaption>
             <div class="float-right">
-                <span class="badge badge-secondary pointer ml-1" @click.stop="addUser(useritem.id)">Añadir Jugador</span>
+                <span class="badge badge-secondary pointer ml-1" @click.stop="addUser(useritem.id)">Añadir Jugador</span><br>
                 <span class="badge badge-secondary pointer ml-1" @click.stop="editRent(rentitem.id)">Editar</span>
                 <span class="badge badge-secondary pointer ml-1" @click.stop="deleteCourt(courtitem.id)">Borrar</span>
             </div>

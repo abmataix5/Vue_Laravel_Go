@@ -129,7 +129,7 @@ export const partnerStore = {
             formData.append("password", "default");
             formData.append("admin", "false");
 
-            PartnerService.update(payload.partneritem.id, formData)
+            PartnerService.update(payload.partneritem.id,formData)
                     .then(function (res) {
                         console.log(res);
                         console.log(res.data);

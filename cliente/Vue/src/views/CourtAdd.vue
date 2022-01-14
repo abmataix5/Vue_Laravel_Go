@@ -8,12 +8,29 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <label htmlFor="user">Nombre :</label>
-          <input type="text" class="form-control" v-model="state.courtitemvalue.name" />
+          <span>Pista:</span><br>
+             <select v-model="state.courtitemvalue.name">
+            <option disabled value="">seleccione pista</option>
+            <option>Kapitalia</option>
+            <option>Padelitis</option>
+            <option>La baronia</option>
+            <option>Maxichina</option>
+            <option>Carnicas Levante</option>
+
+          </select>
         </div>
         <div class="form-group">
-            <label htmlFor="email">Schedule :</label>
-             <input type="text" class="form-control" v-model="state.courtitemvalue.schedule" />
+          <span>Horario:</span><br>
+             <select v-model="state.courtitemvalue.schedule">
+            <option disabled value="">Selecciona un Horario</option>
+            <option>08:00 / 9:30</option>
+            <option>09:30 / 11:00</option>
+            <option>11:00 / 12:30 </option>
+            <option>12:30 / 14:00 </option>
+            <option>17:00 / 18:30 </option>
+            <option>18:30 / 20:00 </option>
+            <option>20:00 / 21:30 </option>
+          </select>
         </div>
          <div class="form-group">
             <label htmlFor="email">Fecha :</label>

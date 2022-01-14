@@ -178,6 +178,7 @@ export default {
               console.log("realiza dispatch");
               this.store.dispatch(Constant.ADD_PARTNER, { partneritem : this.state.form })
               alert("Usuario registrado");
+               router.push({ name:"partnerList" });
           
         } else {
           alert("Error");

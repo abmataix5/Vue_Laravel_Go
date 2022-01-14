@@ -93,7 +93,6 @@ export const workerStore = {
                     store.commit(Constant.LOGIN_WORKER, worker_logued.data.response);
                     alert("Usuario logueado");
                     location.reload();
-                    
                    
                 })
                 .catch(function (error) {
@@ -108,7 +107,7 @@ export const workerStore = {
                     console.log("vuelve LoginWorkerLaravel")
                     console.log(data.data)
                     store.commit(Constant.LOGIN_LARAVEL_WORKER, data.data);
-                   
+                    location.reload();
                 })
                 .catch(function (error) {
                     console.log(error)

@@ -34,13 +34,12 @@ class UserRepository{
     {
         ///DEBUG
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------USER_UPDATE-------------------");
-        
+        $out->writeln("---------------USER_UPDATE_REPO-------------------");
         $out->writeln($data);
-
+        $out->writeln($id);
         $user= User::find($id);
-        // $out->writeln("---------------VALOR BUSQUEDA USER-------------------");
-        // $out->writeln($user);
+        $out->writeln("---------------VALOR BUSQUEDA USER-------------------");
+        $out->writeln($user);
 
         if($user){
             if(isset($data['image'])){ 

@@ -102,13 +102,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, $id)
     {
-
+        try{
+        ///DEBUG
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $out->writeln("---------------USER_UPDATE-------------------");
-        $out->writeln($request);
-        $out->writeln($id);
-        
+        // $out->writeln($request);
+        // $out->writeln($id);
+        $file = $request->query('name');
+        // $file = $request->input();
+        $out->writeln($file);
+
+
         $data = $this->userRepository->update($id,$request->all());
 
         if(is_null($data)){
@@ -116,6 +122,9 @@ class UserController extends Controller
         } else {
             return self::apiResponseSuccess($id, 'Socio actualizado correctamente');
         }
+    }catch(\Throwable|\Exception $e){
+        return self::apiResponseServerError($e, 'Error server interno.');
+    }
     }
 
     /**

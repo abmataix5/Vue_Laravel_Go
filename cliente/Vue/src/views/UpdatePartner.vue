@@ -89,7 +89,7 @@ export default {
           }
 
           console.log("UPDATE PARTNER VIEW");
-            router.push({ name:"partnerList" });
+            // router.push({ name:"partnerList" });
             store.dispatch(Constant.UPDATE_PARTNER, { partneritem: state.partneritemlocal });
         }
 

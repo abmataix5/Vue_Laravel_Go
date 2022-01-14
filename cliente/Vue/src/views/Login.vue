@@ -86,7 +86,7 @@ export default {
             this.store.dispatch("worker/" + Constant.LOGIN_LARAVEL_WORKER, {
             workeritem: this.state.form,
             });
-
+  
           }else{
             this.store.dispatch("worker/" + Constant.LOGIN_WORKER, {
             workeritem: this.state.form,

@@ -70,7 +70,6 @@ Aplicacion web destinada a la adminnistración de un club de padel
 
 
 * *Login* 
-* *Rents* 
 * *Workers List*
 * *Courts List*
 * *Courts List*

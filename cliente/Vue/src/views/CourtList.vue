@@ -1,23 +1,19 @@
 <template>
-    <div class="mt-2 ml-3">
-        <div class="row ml-2">
-            <h3>PISTAS DISPONIBLES</h3>
+    <div class="mt">
+        <div class="row title">
+            <div class="title_panelAdmin ml-4">
+                <h1> Panel Administración Pistas </h1>
+            </div>
         </div>
        <div class="row">
             <div class="col p-3">
-                <router-link class="btn btn-primary" to="/Court/add">Añadir Pista</router-link>
+                <h4>Acciones Disponibles:</h4>
+                <router-link class="btn btn-success" to="/Court/add">Añadir Pista</router-link>
             </div>
         </div>
-        <div class="card card-default card-borderless">
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <ul class="list-group">
-                        <CourtItem v-for="courtitem in courtlist" :key="courtitem.id" :courtitem="courtitem" />
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <hr>
+        <div class="row">
+                <CourtItem v-for="courtitem in courtlist" :key="courtitem.id" :courtitem="courtitem" />
         </div>
     </div>
 </template>
@@ -51,5 +47,7 @@ export default {
 </script>
 
 <style>
-
+.title{
+    background-color: rgba(18, 123, 184, 0.788);
+}
 </style>

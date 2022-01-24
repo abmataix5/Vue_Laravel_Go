@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div class="row col-3 d-flex justify-content-around">
         <figure>
                 <img src="../assets/court.png" class="img-fluid ">
             <figcaption>   
@@ -8,22 +8,22 @@
                 <div>TURNO: {{rentitem.schedule}}</div>
             </figcaption>
             <div class="float-right">
-                <span class="badge badge-secondary pointer ml-1" @click.stop="addUser(useritem.id)">Añadir Jugador</span><br>
-                <span class="badge badge-secondary pointer ml-1" @click.stop="editRent(rentitem.id)">Editar</span>
-                <span class="badge badge-secondary pointer ml-1" @click.stop="deleteCourt(courtitem.id)">Borrar</span>
+                <span class="btn btn-success   pointer ml-1 mt-2" @click.stop="addUser(useritem.id)">Añadir Jugador</span><br>
+                <span class="btn btn-info   pointer ml-1 mt-1" @click.stop="editRent(rentitem.id)">Editar</span>
+                <span class="btn btn-danger pointer ml-1 mt-1" @click.stop="deleteCourt(courtitem.id)">Borrar</span>
             </div>
         </figure>     
 </div>
 </template>
 
 <style>
-.row{
+/* .row{
     display: flex;
     flex-direction: row;
-}
+} */
 figure{
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;

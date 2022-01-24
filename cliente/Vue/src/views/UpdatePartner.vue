@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col p-3">
-        <h2>Actualizar Datos Socio</h2>
-      </div>
-    </div>
+    <div class="row title">
+            <div class="title_panelAdmin ml-3">
+                <h1> Panel Administración Actualizar Datos Usuario </h1>
+            </div>
+        </div>
     <div class="row">
       <div class="col">
          <div class="form-group">
@@ -42,8 +42,8 @@
                 <input type="file" class="form-control" id="image" ref="image"/>
           </div>
         <div class="form-group">
-            <button type="button" class="btn btn-primary m-1" @click="updatePartner">Update</button>
-            <button type="button" class="btn btn-primary m-1" @click="cancel">Cancel</button>
+            <button type="button" class="btn btn-success m-1" @click="updatePartner">Update</button>
+            <button type="button" class="btn btn-danger m-1" @click="cancel">Cancel</button>
         </div>
       </div>
     </div>

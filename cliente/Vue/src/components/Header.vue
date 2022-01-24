@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-lg bg-primary navbar-dark text-white py-4">
         <span class="navbar-brand">MyPadelClub</span>
         <button class="navbar-toggler" type="button" @click="changeIsNavShow">
             <span class="navbar-toggler-icon"></span>
@@ -22,9 +22,7 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/court">Menu Pistas</router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
-                </li>
+               
                 <li class="nav-item">
                     <router-link class="nav-link" to="/login" v-if="state.userLogued === false">Iniciar sesión</router-link>
                 </li>

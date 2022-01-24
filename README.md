@@ -34,7 +34,14 @@ Aplicacion web destinada a la adminnistración de un club de padel
         * SendGrid GO
 
  * [Laravel](https://es.wikipedia.org/wiki/Go_(lenguaje_de_programaci%C3%B3n))
-
+        
+        * Resources
+        * Requests
+        * Repositories
+        * Token JWT
+        * Routes
+        * Traits
+        * Helper (FileUpload)
        
  
  
@@ -49,6 +56,7 @@ Aplicacion web destinada a la adminnistración de un club de padel
         * Headers Authentication -> Token , Admin
         * Reactive
         * Computed
+        * Setup()
     
 
 
@@ -62,7 +70,6 @@ Aplicacion web destinada a la adminnistración de un club de padel
 
 
 * *Login* 
-* *Rents* 
 * *Workers List*
 * *Courts List*
 * *Courts List*
@@ -96,7 +103,7 @@ Aplicacion web destinada a la adminnistración de un club de padel
         <td>Courts List</td>
         <td>
             <ul>
-                <li>Info</li>
+                <li>CourtItem>> Componente que nos muestran el listado de las pistas creadas, con su información correspondiente, tembien permite al administrador editar o borrar pistas</li>
             </ul>
         </td>
     </tr>
@@ -104,7 +111,8 @@ Aplicacion web destinada a la adminnistración de un club de padel
         <td>Partners List</td>
         <td>
             <ul>
-                <li>Info</li>
+                <li>PartnerItem>> Componente que nos muestran el listado de socios con su información correspondiente, tembien permite al administrador editar o borrar socios</li>
+                <li>Añadir Socio >> Ademas de agregar los datos del usuario, nos permite asociar a su perfil, una imagen seleccionada. </li>
             </ul>
         </td>
     </tr>

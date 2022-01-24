@@ -22,9 +22,11 @@
             <div class="card-body">
               <p class="card-text">Consulta tus reservas!</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary btn-primary text-white">Ir a reservas</button>
-                </div>
+               <p>
+              <router-link href="#" class="btn btn-primary my-2" to="/rent" >Ir a reservas</router-link>
+       
+               </p>
+     
             
               </div>
             </div>
@@ -38,9 +40,11 @@
             <div class="card-body">
               <p class="card-text">Socios</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary btn-primary text-white">Administrar socios</button>
-                </div>
+
+                <p>
+              <router-link href="#" class="btn btn-primary my-2" to="/partner" >Mas información</router-link>
+       
+               </p>
      
               </div>
             </div>
@@ -54,9 +58,10 @@
             <div class="card-body">
               <p class="card-text">Consultar pistas disponibles</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary btn-primary text-white">Consultar pistas</button>
-                </div>
+                  <p>
+              <router-link href="#" class="btn btn-primary my-2" to="/court" >Consultar pistas</router-link>
+       
+               </p>
               
               </div>
             </div>
@@ -69,9 +74,12 @@
             <div class="card-body">
               <p class="card-text">Clases de padel</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary btn-primary text-white">Mas información</button>
-                </div>
+               
+                <p>
+
+                 <router-link href="#" class="btn btn-primary my-2" to="/court" >Mas información</router-link>
+       
+               </p>
 
               </div>
             </div>
@@ -84,9 +92,11 @@
             <div class="card-body">
               <p class="card-text">Consulta listado trabajadores</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary btn-primary text-white">Listado de trabajadores</button>
-                </div>
+                <p>
+
+                 <router-link href="#" class="btn btn-primary my-2" to="/workers" >Consultar trabajadores</router-link>
+       
+               </p>
           
               </div>
             </div>
@@ -99,9 +109,12 @@
             <div class="card-body">
               <p class="card-text">Nuestras instalaciones</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary btn-primary text-white">Mas información</button>
-                </div>
+                
+                 <p>
+
+                   <router-link href="#" class="btn btn-primary my-2" to="/workers" >Mas información</router-link>
+       
+                 </p>
               
               </div>
             </div>

@@ -1,20 +1,20 @@
 <template>
     <div style="mt-2">
+        <div class="row title">
+            <div class="title_panelAdmin ml-4">
+                <h1> Panel Administración Socios </h1>
+            </div>
+        </div>
        <div class="row">
             <div class="col p-3">
-                <router-link class="btn btn-primary" to="/partner/add">Añadir Socio</router-link>
+                <h4>Acciones Disponibles:</h4>
+                <router-link class="btn btn-success" to="/partner/add">Añadir Nuevo Socio</router-link>
             </div>
         </div>
-        <div class="card card-default card-borderless">
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <ul class="list-group">
-                        <PartnerItem v-for="partneritem in partnerlist" :key="partneritem.id" :partneritem="partneritem" />
-                    </ul>
-                </div>
-            </div>
-        </div>
+
+        <hr>
+        <div class="row">
+            <PartnerItem v-for="partneritem in partnerlist" :key="partneritem.id" :partneritem="partneritem" />
         </div>
     </div>
 </template>
@@ -48,5 +48,7 @@ export default {
 </script>
 
 <style>
-
+.title{
+    background-color: rgba(178, 178, 179, 0.788);
+}
 </style>

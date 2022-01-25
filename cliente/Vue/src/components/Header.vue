@@ -27,7 +27,7 @@
                     <router-link class="nav-link" to="/login" v-if="state.userLogued === false">Iniciar sesión</router-link>
                 </li>
                   <li class="nav-item">
-                    <router-link class="nav-link" to="/loginLaravel" v-if="state.userLogued === false">Iniciar sesión Laravel</router-link>
+                    <router-link class="nav-link" to="/loginLaravel" v-if="state.userLogued === false">Acceso STAFF </router-link>
                 </li>
                  <li class="nav-item">
                     <router-link class="nav-link" to="/login" v-if="state.userLogued === true" @click="checkOut">Cerrar sesión</router-link>

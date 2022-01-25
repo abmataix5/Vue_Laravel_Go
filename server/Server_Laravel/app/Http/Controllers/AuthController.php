@@ -34,13 +34,6 @@ class AuthController extends Controller
      */
     public function login(Request $request){
 
-        ///DEBUG
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------LOGIN-------------------");
-        $out->writeln("ENTRA LOGIN");
-      
-        $out->writeln("---------------LOGIN-------------------");
-        /////DEBUG
 
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
@@ -50,7 +43,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-     /*    $out->writeln($token); */
+ 
         if (! $token = auth()->attempt($validator->validated())) {
       
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -65,7 +58,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request) {
-        // console.log("ENTRA REGISTER");
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
@@ -93,7 +86,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout() {
+    public function logout() {  // log out
         auth()->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
@@ -104,7 +97,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function refresh() {
+    public function refresh() {        //renew token.
         return $this->createNewToken(auth()->refresh());
     }
 
@@ -113,19 +106,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function userProfile() {
-          ///DEBUG
-          $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-          $out->writeln("---------------USERPROFILE-------------------");
-          /////DEBUG
+    public function userProfile() {  //envia el perfil del usuario si esta auth.
+          
         return response()->json(auth()->user());
     }
 
     public function isAdmin(Request $request) {  //go consulta este endpoint para saber el tipos de usuario auth(). 
-        ///DEBUG
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------IS_ADMIN-------------------");
-        /////DEBUG
 
         $data=$this->authRepository->isAdmin($request->email);
         if(is_null($data)){
@@ -135,8 +121,6 @@ class AuthController extends Controller
         }    
     }
 
-
-
     /**
      * Get the token array structure.
      *
@@ -145,13 +129,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     protected function createNewToken($token){
-         ///DEBUG
-         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $out->writeln("---------------LOGIN-------------------");
-         $out->writeln($token);
-       
-         $out->writeln("---------------LOGIN-------------------");
-         /////DEBUG
+ 
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

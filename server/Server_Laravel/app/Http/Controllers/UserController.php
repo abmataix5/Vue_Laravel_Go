@@ -10,19 +10,23 @@ use App\Http\Requests\StoreUserRequest;
 
 use App\Traits\ApiResponseTrait;
 use App\Repositories\UserRepository;
+// use App\Repositories\MailRepository;
 
 use App\Models\User;
+
 
 class UserController extends Controller
 {
 
     use ApiResponseTrait;
     public $userRepository;
-
+    // public $mailRepository;
     public function __construct(UserRepository $userRepository)
+    // public function __construct(UserRepository $userRepository,MailRepository $mailRepository)
     {
         $this->userRepository = $userRepository;
-        // $this->not_found = Response::HTTP_NOT_FOUND;
+        // $this->mailRepository = $mailRepository;
+     
     }
 
     /**
@@ -32,10 +36,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        ///DEBUG
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------USER LIST-------------------");
-        /////DEBUG
         $data=$this->userRepository->all();
     
         return self::apiResponseSuccess(new UserCollection($data), 'Listado Socios');
@@ -61,13 +61,10 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         try{
-         ///DEBUG
-            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-            $out->writeln("---------------USER_STORE-------------------");
-            $out->writeln($request);
-         /////DEBUG
-
+         
+            // $data= $this->mailRepository->sendMail($request->all());
             $data = $this->userRepository->create($request->all());
+
             return self::apiResponseSuccess($data, 'Socio registrado correctamente');
 
         }catch(\Throwable|\Exception $e){
@@ -83,12 +80,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        ///DEBUG
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln("---------------USER-------------------");
-        /////DEBUG
         return UserResource::make(User::where('id', $id)->firstOrFail());
-        //
+    
     }
 
     /**
@@ -109,8 +102,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, $id)
     {
+        try{
+        ///DEBUG
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln("---------------USER_UPDATE-------------------");
+        // $out->writeln($request);
+        // $out->writeln($id);
+        $file = $request->query('name');
+        // $file = $request->input();
+        $out->writeln($file);
+
+
         $data = $this->userRepository->update($id,$request->all());
 
         if(is_null($data)){
@@ -118,6 +122,9 @@ class UserController extends Controller
         } else {
             return self::apiResponseSuccess($id, 'Socio actualizado correctamente');
         }
+    }catch(\Throwable|\Exception $e){
+        return self::apiResponseServerError($e, 'Error server interno.');
+    }
     }
 
     /**

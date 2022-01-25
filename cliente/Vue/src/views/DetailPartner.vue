@@ -8,6 +8,15 @@
         <div class="card card-default card-borderless">
         <div class="card-body">
             <div class="row">
+                 <div class="col-1">
+                    <div class="row">
+                        <img class="h-75" v-bind:src="partnerdetail.image" /> 
+                    </div>
+                    <div class="row">
+                        <!-- <button type="button" class="btn btn-primary m-1" @click="add_img">Cambiar Avatar</button> -->
+                        <!-- <button type="button" class="btn btn-primary m-1" @click="delete_img">Eliminar</button> -->
+                    </div>
+                </div>
                 <div class="col">
                     <ul class="list-group">
                         Num Socio: {{partnerdetail.id}} <br>
@@ -18,6 +27,7 @@
                         Posición: {{partnerdetail.position}}<br>
                         <!-- rellenar datos -->
                     </ul>
+                   
                 </div>
             </div>
         </div>

@@ -1,27 +1,18 @@
 <template>
     <div style="mt-2">
-       <div class="row">
-            <div class="col p-3">
-                <router-link class="btn btn-primary" to="/Rent/add">Unirme a la partida</router-link>
+         <div class="row title">
+            <div class="title_panelAdmin ml-4">
+                <h1> Panel Administración Alquileres </h1>
             </div>
         </div>
         <div class="row">
             <div class="col p-3">
-                 <div>Dias</div>
+                 <h4>Acciones Disponibles:</h4>
+                <router-link class="btn btn-success" to="/Rent/add">Unirme a la partida</router-link>
             </div>
-           
-
         </div>
-        <div class="card card-default card-borderless">
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <div class="list-group">
+        <div class="row">
                         <RentItem v-for="rentitem in rentlist" :key="rentitem.id" :rentitem="rentitem" />
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
     </div>
 </template>
@@ -55,5 +46,7 @@ export default {
 </script>
 
 <style>
-
+.title{
+    background-color: rgba(178, 178, 179, 0.788);
+}
 </style>

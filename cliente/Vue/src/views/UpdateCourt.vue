@@ -8,17 +8,34 @@
     <div class="row">
       <div class="col">
          <div class="form-group">
-          <label htmlFor="id"> ID:</label>
-          <input type="text" class="form-control" v-model="state.courtitemlocal.id" />
+          <label htmlFor="id" > ID:</label>
+          <input type="text" class="form-control" v-model="state.courtitemlocal.id" readonly />
         </div>
 
-        <div class="form-group">
-          <label htmlFor="name"> Pista:</label>
-          <input type="text" class="form-control" v-model="state.courtitemlocal.name" />
+       <div class="form-group">
+          <span>Pista:</span><br>
+             <select v-model="state.courtitemlocal.name">
+            <option disabled value="">seleccione pista</option>
+            <option>Kapitalia</option>
+            <option>Padelitis</option>
+            <option>La baronia</option>
+            <option>Maxichina</option>
+            <option>Carnicas Levante</option>
+
+          </select>
         </div>
         <div class="form-group">
-            <label htmlFor="schedule">TURNO :</label>
-            <textarea class="form-control" rows="1" id="schedule" v-model="state.courtitemlocal.schedule"></textarea>  
+          <span>Horario:</span><br>
+             <select v-model="state.courtitemlocal.schedule">
+            <option disabled value="">Selecciona un Horario</option>
+            <option>08:00 / 9:30</option>
+            <option>09:30 / 11:00</option>
+            <option>11:00 / 12:30 </option>
+            <option>12:30 / 14:00 </option>
+            <option>17:00 / 18:30 </option>
+            <option>18:30 / 20:00 </option>
+            <option>20:00 / 21:30 </option>
+          </select>
         </div>
         <div class="form-group">
             <label htmlFor="date">FECHA :</label>
@@ -41,8 +58,8 @@
             <textarea class="form-control" rows="1" id="B_reves" v-model="state.courtitemlocal.B_reves"></textarea>  
         </div>
         <div class="form-group">
-            <button type="button" class="btn btn-primary m-1" @click="updateCourt">Update</button>
-            <button type="button" class="btn btn-primary m-1" @click="cancel">Cancel</button>
+            <button type="button" class="btn btn-success m-1" @click="updateCourt">Update</button>
+            <button type="button" class="btn btn-danger m-1" @click="cancel">Cancel</button>
         </div>
       </div>
     </div>

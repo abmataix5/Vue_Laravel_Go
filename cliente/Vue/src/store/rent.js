@@ -26,8 +26,8 @@ export const rentStore = {
                 console.log("AAAAA");
                 console.log(state);
                 console.log("payload data: ")
-                console.log(payload.data);
-                state.rentlist = payload.data;
+                console.log(payload.data.data);
+                state.rentlist = payload.data.data;
             } else {
                 state.rentlist = { id:"", name: "",schedule: "",date: "", A_drive: "",A_reves: "", B_drive: "",B_reves: "" };
             }

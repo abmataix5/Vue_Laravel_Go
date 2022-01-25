@@ -46,5 +46,7 @@ export default {
 </script>
 
 <style>
-
+.title{
+    background-color: rgba(178, 178, 179, 0.788);
+}
 </style>

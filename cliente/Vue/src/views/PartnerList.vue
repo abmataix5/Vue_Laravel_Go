@@ -49,6 +49,6 @@ export default {
 
 <style>
 .title{
-    background-color: rgba(18, 123, 184, 0.788);
+    background-color: rgba(178, 178, 179, 0.788);
 }
 </style>

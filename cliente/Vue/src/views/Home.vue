@@ -120,23 +120,52 @@
             </div>
           </div>
         </div>
-      
-
-     
-      
-   
-
-  
-      
+        
       </div>
     </div>
   </div>
-
+  <!-- <cookie-consent/> -->
+<div id="myModal" class="modalContainer">
+ <div class="modal-content">
+ <span class="close">x</span>
+<h2>Permitir Cokies</h2>
+ <p>Esta página usa cokies para la mejora de la administración y funcionamiento del sitio. Puede consultar nuestro terminos.</p> 
+ <div id="ctr_buttons">
+  <button type="button" id="btn-aceptar" class=" ml-1 btn btn-success">Aceptar</button>
+  <button type="button" id="btn-rechazar" class="ml-1 btn btn-danger">Rechazar</button>
+ </div>
+ </div>
+ 
+ </div> 
 </div>
+
+
 </template>
 
 <script>
   export default {
+    setup(){
+      document.addEventListener("DOMContentLoaded", function(event) {
+        console.log(event)
+      var modal = document.getElementById("myModal");
+			var btn_aceptar = document.getElementById("btn-aceptar");
+      var btn_rechazar = document.getElementById("btn-rechazar");
+			var span = document.getElementsByClassName("close")[0];
+
+      modal.style.display = "block";
+      btn_aceptar.onclick = function() {
+              modal.style.display = "none";
+            }
+      btn_rechazar.onclick = function() {
+              modal.style.display = "none";
+            }
+
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+
+      });
+    },
     data() {
       return {
         slide: 0,
@@ -151,7 +180,47 @@
       onSlideEnd(slide) {
            console.log(slide)
         this.sliding = false
-      }
+      },
     }
   }
+  
 </script>
+<style>
+.modalContainer {
+			display: none; 
+			position: fixed; 
+			z-index: 1;
+			padding-top: 100px;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%; 
+			overflow: auto; 
+			background-color: rgb(0,0,0);
+			background-color: rgba(0,0,0,0.4);
+		}
+
+		.modalContainer .modal-content {
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid lightgray;
+			border-top: 10px solid #58abb7;
+			width: 60%;
+		}
+
+		.modalContainer .close {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.modalContainer .close:hover,
+		.modalContainer .close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+</style>

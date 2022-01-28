@@ -1,9 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-primary navbar-dark text-white py-4">
-        <span class="navbar-brand">MyPadelClub</span>
-        <button class="navbar-toggler" type="button" @click="changeIsNavShow">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        
+     <router-link href="#" class="navbar-brand title" to="/" >MyPadelClub</router-link>
 
         <div :class="navClass">
             <ul class="navbar-nav">
